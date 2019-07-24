@@ -7,14 +7,14 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
-
+$custom_tag = 'script';
 ?>
 
-<script>
+<<?php echo esc_attr( $custom_tag ); ?>>
 	window.vcTemplatesLibraryData = {
 		templates: <?php echo wp_json_encode( $templates ); ?>
 	};
-</script>
+</<?php echo esc_attr( $custom_tag ); ?>>
 <div class="vc_ui-panel-popup vc_ui-hidden">
 	<div class="vc_ui-panel-template-content vc_ui-panel-popup-item vc_ui-hidden">
 		<button type="button" class="vc_general vc_ui-control-button vc_ui-panel-close-button">
@@ -109,7 +109,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 </div>
 
-<script type="text/html" id="vc_template-item">
+<<?php echo esc_attr( $custom_tag ); ?> type="text/html" id="vc_template-item">
 	<div class="vc_ui-template vc_templates-template-type-shared_templates"
 			data-template_id="<%- post_id %>"
 			data-template_name="<%- title %>"
@@ -140,9 +140,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="vc_ui-template-content" data-js-content>
 		</div>
 	</div>
-</script>
+</<?php echo esc_attr( $custom_tag ); ?>>
 
-<script type="text/html" id="vc_template-grid-item">
+<<?php echo esc_attr( $custom_tag ); ?> type="text/html" id="vc_template-grid-item">
 	<div class="vc_ui-panel-template-item vc_ui-visible" data-template-id="<%- id %>">
 		<span class="vc_ui-panel-template-item-content">
 			<img src="<%- thumbnailUrl %>" alt=""/>
@@ -167,4 +167,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</span>
 		<%= status %>
 	</div>
-</script>
+</<?php echo esc_attr( $custom_tag ); ?>>

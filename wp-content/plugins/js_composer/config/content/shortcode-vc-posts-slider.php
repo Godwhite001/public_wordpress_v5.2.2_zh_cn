@@ -139,7 +139,7 @@ return array(
 				esc_html__( 'Comment count', 'js_composer' ) => 'comment_count',
 				esc_html__( 'Menu order', 'js_composer' ) => 'menu_order',
 			),
-			'description' => sprintf( esc_html__( 'Select how to sort retrieved posts. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+			'description' => sprintf( esc_html__( 'Select how to sort retrieved posts. More at %s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 		),
 		array(
 			'type' => 'dropdown',
@@ -149,13 +149,13 @@ return array(
 				esc_html__( 'Descending', 'js_composer' ) => 'DESC',
 				esc_html__( 'Ascending', 'js_composer' ) => 'ASC',
 			),
-			'description' => sprintf( esc_html__( 'Select ascending or descending order. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+			'description' => sprintf( esc_html__( 'Select ascending or descending order. More at %s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 		),
 		array(
 			'type' => 'el_id',
 			'heading' => esc_html__( 'Element ID', 'js_composer' ),
 			'param_name' => 'el_id',
-			'description' => sprintf( esc_html__( 'Enter element ID (Note: make sure it is unique and valid according to %sw3c specification%s).', 'js_composer' ), '<a href="http://www.w3schools.com/tags/att_global_id.asp" target="_blank">', '</a>' ),
+			'description' => sprintf( esc_html__( 'Enter element ID (Note: make sure it is unique and valid according to %sw3c specification%s).', 'js_composer' ), '<a href="https://www.w3schools.com/tags/att_global_id.asp" target="_blank">', '</a>' ),
 		),
 		array(
 			'type' => 'textfield',

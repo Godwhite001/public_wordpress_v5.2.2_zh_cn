@@ -10,10 +10,6 @@ $vc_role = new Vc_Roles();
 <form action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>" method="post"
 	id="vc_settings-<?php echo esc_attr( $tab ); ?>"
 	class="vc_settings-tab-content vc_settings-tab-content-active"
-	<?php
-	// @codingStandardsIgnoreLine
-	echo apply_filters( 'vc_setting-tab-form-' . $tab, '' );
-	?>
 	data-vc-roles="form">
 	<div class="tab_intro">
 		<p><?php esc_html_e( 'Control user group role access to the features and options of WPBakery Page Builder - manage WordPress default and custom roles.', 'js_composer' ); ?></p>

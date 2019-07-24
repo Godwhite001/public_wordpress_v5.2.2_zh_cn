@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</div>
 						<?php
 						// @codingStandardsIgnoreLine
-						echo $box->getPresets();
+						print $box->getPresets();
 						?>
 					</div>
 				</div>

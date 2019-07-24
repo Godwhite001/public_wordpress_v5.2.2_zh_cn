@@ -83,5 +83,5 @@ $separatorHtml = <<<TEMPLATE
 <div class="$css_class" $wrapper_attributes_html><span class="vc_sep_holder vc_sep_holder_l"><span $inline_css class="vc_sep_line"></span></span>$content<span class="vc_sep_holder vc_sep_holder_r"><span $inline_css class="vc_sep_line"></span></span>
 </div>
 TEMPLATE;
-// @codingStandardsIgnoreLine
-echo $separatorHtml;
+
+return $separatorHtml;

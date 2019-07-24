@@ -11,15 +11,16 @@ if ( vc_user_access()->part( 'presets' )->can()->get() ) {
 }
 // [/shortcodes presets data]
 global $wp_version;
+$custom_tag = 'script'; // TODO: Use ajax for variables
 ?>
-	<script type="text/javascript">
+	<<?php echo esc_attr( $custom_tag ); ?>>
 		window.vc_all_presets = <?php echo wp_json_encode( $vc_all_presets ); ?>;
 		window.vc_post_id = <?php echo esc_js( get_the_ID() ); ?>;
 		window.wpbGutenbergEditorUrl = '<?php echo esc_js( set_url_scheme( admin_url( 'post-new.php?post_type=wpb_gutenberg_param' ) ) ); ?>';
 		window.wpbGutenbergEditorSWitchUrl = '<?php echo esc_js( set_url_scheme( admin_url( 'post.php?post=' . get_the_ID() . '&action=edit&vcv-gutenberg-editor' ) ) ); ?>';
 		window.wpbGutenbergEditorClassicSWitchUrl = '<?php echo esc_js( set_url_scheme( admin_url( 'post.php?post=' . get_the_ID() . '&action=edit&classic-editor' ) ) ); ?>';
 		window.wpbIsGutenberg = <?php echo version_compare( $wp_version, '4.9.8', '>' ) && ! get_option( 'wpb_js_gutenberg_disable' ) ? 'true' : 'false'; ?>;
-	</script>
+	</<?php echo esc_attr( $custom_tag ); ?>>
 
 <?php
 
@@ -27,13 +28,14 @@ require_once vc_path_dir( 'EDITORS_DIR', 'navbar/class-vc-navbar.php' );
 /** @var WP_Post $post */
 $nav_bar = new Vc_Navbar( $post );
 $nav_bar->render();
+$first_tag = 'style';
 /** @var Vc_Backend_Editor $editor */
 ?>
-	<style>
+	<<?php echo esc_attr( $first_tag ); ?>>
 		#wpb_visual_composer {
 			display: none;
 		}
-	</style>
+	</<?php echo esc_attr( $first_tag ); ?>>
 	<div class="metabox-composer-content">
 		<div id="visual_composer_content" class="wpb_main_sortable main_wrapper"></div>
 		<?php require vc_path_dir( 'TEMPLATES_DIR', 'editors/partials/vc_welcome_block.tpl.php' ); ?>

@@ -114,7 +114,7 @@ if ( 'true' === $add_icon ) {
 		$button_html .= ' ' . $icon_html;
 	}
 }
-
+$output = '';
 if ( 'custom' === $style ) {
 	if ( $custom_background ) {
 		$styles[] = vc_get_css_color( 'background-color', $custom_background );
@@ -189,8 +189,9 @@ if ( 'custom' === $style ) {
 	$gradient_css_hover[] = 'background-position: 100% 0';
 
 	$uid = uniqid();
-	echo '<style type="text/css">.vc_btn3-style-' . esc_attr( $style ) . '.vc_btn-gradient-btn-' . esc_attr( $uid ) . ':hover{' . esc_attr( implode( ';', $gradient_css_hover ) ) . ';' . '}</style>';
-	echo '<style type="text/css">.vc_btn3-style-' . esc_attr( $style ) . '.vc_btn-gradient-btn-' . esc_attr( $uid ) . '{' . esc_attr( implode( ';', $gradient_css ) ) . ';' . '}</style>';
+	$first_tag = 'style';
+	$output .= '<' . $first_tag . '>.vc_btn3-style-' . esc_attr( $style ) . '.vc_btn-gradient-btn-' . esc_attr( $uid ) . ':hover{' . esc_attr( implode( ';', $gradient_css_hover ) ) . ';' . '}</' . $first_tag . '>';
+	$output .= '<' . $first_tag . '>.vc_btn3-style-' . esc_attr( $style ) . '.vc_btn-gradient-btn-' . esc_attr( $uid ) . '{' . esc_attr( implode( ';', $gradient_css ) ) . ';' . '}</' . $first_tag . '>';
 	$button_classes[] = 'vc_btn-gradient-btn-' . $uid;
 	$attributes[] = 'data-vc-gradient-1="' . $gradient_color_1 . '"';
 	$attributes[] = 'data-vc-gradient-2="' . $gradient_color_2 . '"';
@@ -212,7 +213,7 @@ if ( $button_classes ) {
 }
 
 if ( $use_link ) {
-	$attributes[] = 'href="' . trim( $a_href ) . '"';
+	$attributes[] = 'href="' . esc_url( trim( $a_href ) ) . '"';
 	$attributes[] = 'title="' . esc_attr( trim( $a_title ) ) . '"';
 	if ( ! empty( $a_target ) ) {
 		$attributes[] = 'target="' . esc_attr( trim( $a_target ) ) . '"';
@@ -227,15 +228,15 @@ if ( ! empty( $custom_onclick ) && $custom_onclick_code ) {
 }
 
 $attributes = implode( ' ', $attributes );
-?>
-<div class="<?php echo esc_attr( trim( $css_class ) ); ?>"<?php echo ! empty( $el_id ) ? ' id="' . esc_attr( $el_id ) . '"' : false; ?> >
-	<?php
-	if ( $use_link ) {
-		// @codingStandardsIgnoreLine
-		echo '<a ' . $attributes . '>' . $button_html . '</a>';
-	} else {
-		// @codingStandardsIgnoreLine
-		echo '<button ' . $attributes . '>' . $button_html . '</button>';
-	}
-	?>
-	</div>
+
+$output .= '<div class="' . esc_attr( trim( $css_class ) ) . '"' . ( ! empty( $el_id ) ? ' id="' . esc_attr( $el_id ) . '"' : '' ) . ' >';
+
+if ( $use_link ) {
+	$output .= '<a ' . $attributes . '>' . $button_html . '</a>';
+} else {
+	$output .= '<button ' . $attributes . '>' . $button_html . '</button>';
+}
+
+$output .= '</div>';
+
+return $output;

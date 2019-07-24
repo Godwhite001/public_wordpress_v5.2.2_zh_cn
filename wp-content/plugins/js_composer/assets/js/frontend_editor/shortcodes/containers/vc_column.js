@@ -1,4 +1,5 @@
 (function ( $ ) {
+	'use strict';
 	window.InlineShortcodeView_vc_column = window.InlineShortcodeViewContainerWithParent.extend( {
 		controls_selector: '#vc_controls-template-vc_column',
 		resizeDomainName: 'columnSize',
@@ -66,7 +67,7 @@
 			vc.frame_window.jQuery( 'body' ).addClass( 'vc_column-dragging' ).disableSelection();
 			this._x = parseInt( e.pageX, 10 );
 			vc.$page.bind( 'mousemove.' + this.resizeDomainName, this.resize );
-			$( vc.frame_window.document ).mouseup( this.stopChangeSize );
+			$( vc.frame_window.document ).on( 'mouseup', this.stopChangeSize );
 		},
 		stopChangeSize: function () {
 			this._x = 0;

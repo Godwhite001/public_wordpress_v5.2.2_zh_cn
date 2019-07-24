@@ -22,7 +22,7 @@ return array(
 			'param_name' => 'flickr_id',
 			'value' => '95572727@N00',
 			'admin_label' => true,
-			'description' => sprintf( esc_html__( 'To find your flickID visit %s.', 'js_composer' ), '<a href="http://idgettr.com/" target="_blank">idGettr</a>' ),
+			'description' => sprintf( esc_html__( 'To find your flickID visit %s.', 'js_composer' ), '<a href="https://www.webfx.com/tools/idgettr/" target="_blank">idGettr</a>' ),
 		),
 		array(
 			'type' => 'dropdown',
@@ -66,7 +66,7 @@ return array(
 			'type' => 'el_id',
 			'heading' => esc_html__( 'Element ID', 'js_composer' ),
 			'param_name' => 'el_id',
-			'description' => sprintf( esc_html__( 'Enter element ID (Note: make sure it is unique and valid according to %sw3c specification%s).', 'js_composer' ), '<a href="http://www.w3schools.com/tags/att_global_id.asp" target="_blank">', '</a>' ),
+			'description' => sprintf( esc_html__( 'Enter element ID (Note: make sure it is unique and valid according to %sw3c specification%s).', 'js_composer' ), '<a href="https://www.w3schools.com/tags/att_global_id.asp" target="_blank">', '</a>' ),
 		),
 		array(
 			'type' => 'textfield',

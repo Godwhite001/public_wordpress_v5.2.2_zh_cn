@@ -24,7 +24,7 @@ if ( is_array( $icons_params ) && ! empty( $icons_params ) ) {
 		if ( is_array( $param ) && ! empty( $param ) ) {
 			if ( 'i_type' === $param['param_name'] ) {
 				// append pixelicons to dropdown
-				$icons_params[ $key ]['value'][ __( 'Pixel', 'js_composer' ) ] = 'pixelicons';
+				$icons_params[ $key ]['value'][ esc_html__( 'Pixel', 'js_composer' ) ] = 'pixelicons';
 			}
 			if ( isset( $param['admin_label'] ) ) {
 				// remove admin label
@@ -47,22 +47,22 @@ $color_value = array_merge( array(
 $params = array_merge( array(
 	array(
 		'type' => 'textfield',
-		'heading' => __( 'Text', 'js_composer' ),
+		'heading' => esc_html__( 'Text', 'js_composer' ),
 		'param_name' => 'title',
 		// fully compatible to btn1 and btn2
-		'value' => __( 'Text on the button', 'js_composer' ),
+		'value' => esc_html__( 'Text on the button', 'js_composer' ),
 	),
 	array(
 		'type' => 'vc_link',
-		'heading' => __( 'URL (Link)', 'js_composer' ),
+		'heading' => esc_html__( 'URL (Link)', 'js_composer' ),
 		'param_name' => 'link',
-		'description' => __( 'Add link to button.', 'js_composer' ),
+		'description' => esc_html__( 'Add link to button.', 'js_composer' ),
 		// compatible with btn2 and converted from href{btn1}
 	),
 	array(
 		'type' => 'dropdown',
-		'heading' => __( 'Style', 'js_composer' ),
-		'description' => __( 'Select button display style.', 'js_composer' ),
+		'heading' => esc_html__( 'Style', 'js_composer' ),
+		'description' => esc_html__( 'Select button display style.', 'js_composer' ),
 		'param_name' => 'style',
 		// partly compatible with btn2, need to be converted shape+style from btn2 and btn1
 		'value' => array(
@@ -108,9 +108,9 @@ $params = array_merge( array(
 	),
 	array(
 		'type' => 'colorpicker',
-		'heading' => __( 'Gradient Color 1', 'js_composer' ),
+		'heading' => esc_html__( 'Gradient Color 1', 'js_composer' ),
 		'param_name' => 'gradient_custom_color_1',
-		'description' => __( 'Select first color for gradient.', 'js_composer' ),
+		'description' => esc_html__( 'Select first color for gradient.', 'js_composer' ),
 		'param_holder_class' => 'vc_colored-dropdown vc_btn3-colored-dropdown',
 		'value' => '#dd3333',
 		'dependency' => array(
@@ -294,7 +294,7 @@ $params = array_merge( array(
 ), $icons_params, array(
 	array(
 		'type' => 'iconpicker',
-		'heading' => __( 'Icon', 'js_composer' ),
+		'heading' => esc_html__( 'Icon', 'js_composer' ),
 		'param_name' => 'i_icon_pixelicons',
 		'value' => 'vc_pixel_icon vc_pixel_icon-alert',
 		'settings' => array(
@@ -315,7 +315,7 @@ $params = array_merge( array(
 		'type' => 'el_id',
 		'heading' => esc_html__( 'Element ID', 'js_composer' ),
 		'param_name' => 'el_id',
-		'description' => sprintf( esc_html__( 'Enter element ID (Note: make sure it is unique and valid according to %sw3c specification%s).', 'js_composer' ), '<a href="http://www.w3schools.com/tags/att_global_id.asp" target="_blank">', '</a>' ),
+		'description' => sprintf( esc_html__( 'Enter element ID (Note: make sure it is unique and valid according to %sw3c specification%s).', 'js_composer' ), '<a href="https://www.w3schools.com/tags/att_global_id.asp" target="_blank">', '</a>' ),
 	),
 	array(
 		'type' => 'textfield',

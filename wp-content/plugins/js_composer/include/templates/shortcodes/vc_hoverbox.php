@@ -68,6 +68,5 @@ $template = <<<HTML
   </div>
 </div>
 HTML;
-// @codingStandardsIgnoreLine
-echo $template;
 
+return $template;

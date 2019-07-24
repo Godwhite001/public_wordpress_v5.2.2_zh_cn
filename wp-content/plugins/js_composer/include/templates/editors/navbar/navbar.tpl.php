@@ -10,14 +10,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="vc_navbar-header">
 		<?php
 		// @codingStandardsIgnoreLine
-		echo $nav_bar->getLogo();
+		print $nav_bar->getLogo();
 		?>
 	</div>
 	<ul class="vc_navbar-nav">
 		<?php
 		foreach ( $controls as $control ) :
 			// @codingStandardsIgnoreLine
-			echo $control[1];
+			print $control[1];
 		endforeach;
 		?>
 	</ul>

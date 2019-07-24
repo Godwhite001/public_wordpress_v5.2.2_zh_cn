@@ -55,7 +55,7 @@ if ( 'post_title' === $source ) {
 
 if ( ! empty( $link ) ) {
 	$link = vc_build_link( $link );
-	$text = '<a href="' . esc_attr( $link['url'] ) . '"' . ( $link['target'] ? ' target="' . esc_attr( $link['target'] ) . '"' : '' ) . ( $link['rel'] ? ' rel="' . esc_attr( $link['rel'] ) . '"' : '' ) . ( $link['title'] ? ' title="' . esc_attr( $link['title'] ) . '"' : '' ) . '>' . $text . '</a>';
+	$text = '<a href="' . esc_url( $link['url'] ) . '"' . ( $link['target'] ? ' target="' . esc_attr( $link['target'] ) . '"' : '' ) . ( $link['rel'] ? ' rel="' . esc_attr( $link['rel'] ) . '"' : '' ) . ( $link['title'] ? ' title="' . esc_attr( $link['title'] ) . '"' : '' ) . '>' . $text . '</a>';
 }
 $wrapper_attributes = array();
 if ( ! empty( $el_id ) ) {
@@ -73,5 +73,5 @@ if ( apply_filters( 'vc_custom_heading_template_use_wrapper', false ) ) {
 	$output .= $text;
 	$output .= '</' . $font_container_data['values']['tag'] . '>';
 }
-// @codingStandardsIgnoreLine
-echo $output;
+
+return $output;

@@ -56,13 +56,24 @@ function vc_output_required_params_to_init() {
 		$js_array[] = '"' . $param . '"';
 	}
 
-	// @codingStandardsIgnoreStart
-	echo '
-		<script type="text/javascript">
-			if ( window.vc ) {
-				window.vc.required_params_to_init = [' . implode( ',', $js_array ) . '];
-			}
-		</script>
-	';
-	// @codingStandardsIgnoreEnd
+	$data = '
+	if ( window.vc ) {
+		window.vc.required_params_to_init = [' . implode( ',', $js_array ) . '];
+	}';
+	$custom_tag = 'script';
+	$output = '<' . $custom_tag . '>' . $data . '</' . $custom_tag . '>';
+
+	echo $output;
+}
+
+add_action( 'wp_ajax_wpb_gallery_html', 'vc_gallery_html' );
+
+function vc_gallery_html() {
+	vc_user_access()->checkAdminNonce()->validateDie()->wpAny( 'edit_posts', 'edit_pages' )->validateDie();
+
+	$images = vc_post_param( 'content' );
+	if ( ! empty( $images ) ) {
+		wp_send_json_success( vc_field_attached_images( explode( ',', $images ) ) );
+	}
+	die();
 }

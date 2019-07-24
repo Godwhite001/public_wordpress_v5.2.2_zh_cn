@@ -32,9 +32,21 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 		 *
 		 */
 		public function addAjaxActions() {
-			add_action( 'wp_ajax_vc_automapper', array(
+			add_action( 'wp_ajax_vc_automapper_create', array(
 				$this,
-				'goAction',
+				'create',
+			) );
+			add_action( 'wp_ajax_vc_automapper_read', array(
+				$this,
+				'read',
+			) );
+			add_action( 'wp_ajax_vc_automapper_update', array(
+				$this,
+				'update',
+			) );
+			add_action( 'wp_ajax_vc_automapper_delete', array(
+				$this,
+				'delete',
 			) );
 
 			return $this;
@@ -75,8 +87,9 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 		 *
 		 */
 		public function renderMapFormTpl() {
+			$custom_tag = 'script'; // Maybe use html shadow dom or ajax response for templates
 			?>
-			<script type="text/html" id="vc_automapper-add-form-tpl">
+			<<?php echo esc_attr( $custom_tag ); ?> type="text/html" id="vc_automapper-add-form-tpl">
 				<label for="vc_atm-shortcode-string"
 						class="vc_info"><?php esc_html_e( 'Shortcode string', 'js_composer' ); ?></label>
 
@@ -94,8 +107,8 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 				</div>
 				<span
 						class="description"><?php esc_html_e( 'Enter valid shortcode (Example: [my_shortcode first_param="first_param_value"]My shortcode content[/my_shortcode]).', 'js_composer' ); ?></span>
-			</script>
-			<script type="text/html" id="vc_automapper-item-complex-tpl">
+			</<?php echo esc_attr( $custom_tag ); ?>>
+			<<?php echo esc_attr( $custom_tag ); ?> type="text/html" id="vc_automapper-item-complex-tpl">
 				<div class="widget-top">
 					<div class="widget-title-action">
 						<button type="button" class="widget-action hide-if-no-js" aria-expanded="true">
@@ -107,8 +120,8 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 				</div>
 				<div class="widget-inside">
 				</div>
-			</script>
-			<script type="text/html" id="vc_automapper-form-tpl">
+			</<?php echo esc_attr( $custom_tag ); ?>>
+			<<?php echo esc_attr( $custom_tag ); ?> type="text/html" id="vc_automapper-form-tpl">
 				<input type="hidden" name="name" id="vc_atm-name" value="{{ name }}">
 
 				<div class="vc_shortcode-preview" id="vc_shortcode-preview">
@@ -153,8 +166,8 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 					<a href="#" class="button vc_atm-cancel"><?php esc_html_e( 'Cancel', 'js_composer' ); ?></a>
 					<a href="#" class="button vc_atm-delete"><?php esc_html_e( 'Delete', 'js_composer' ); ?></a>
 				</div>
-			</script>
-			<script type="text/html" id="vc_atm-form-param-tpl">
+			</<?php echo esc_attr( $custom_tag ); ?>>
+			<<?php echo esc_attr( $custom_tag ); ?> type="text/html" id="vc_atm-form-param-tpl">
 				<div class="vc_controls vc_controls-row vc_clearfix"><a
 							class="vc_control column_move vc_column-move vc_move-param" href="#"
 							title="<?php esc_html_e( 'Drag row to reorder', 'js_composer' ); ?>" data-vc-control="move"><i
@@ -238,7 +251,7 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 						</div>
 					</div>
 				</div>
-			</script>
+			</<?php echo esc_attr( $custom_tag ); ?>>
 			<?php
 		}
 
@@ -246,53 +259,38 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 		 *
 		 */
 		public function renderTemplates() {
+			$custom_tag = 'script'; // Maybe use ajax resonse for template
 			?>
-			<script type="text/html" id="vc_automapper-item-tpl">
+			<<?php echo esc_attr( $custom_tag ); ?> type="text/html" id="vc_automapper-item-tpl">
 				<label class="vc_automapper-edit-btn">{{ name }}</label>
 				<span class="vc_automapper-item-controls">
 					<a href="#" class="vc_automapper-delete-btn" title="<?php esc_html_e( 'Delete', 'js_composer' ); ?>"></a>
 					<a href="#" class="vc_automapper-edit-btn" title="<?php esc_html_e( 'Edit', 'js_composer' ); ?>"></a>
 				</span>
-			</script>
+			</<?php echo esc_attr( $custom_tag ); ?>>
 			<?php
 			$this->renderMapFormTpl();
 		}
 
-		/**
-		 * Action methods(CRUD)
-		 */
-		public function goAction() {
+		public function create() {
 			if ( ! vc_request_param( '_vcnonce' ) ) {
 				return;
 			}
 			vc_user_access()->checkAdminNonce()->validateDie()->wpAny( 'manage_options' )->validateDie()->part( 'settings' )->can( 'vc-automapper-tab' )->validateDie();
 
-			$action = vc_post_param( 'vc_action' );
-			if ( in_array( $action, array(
-				'read',
-				'create',
-				'update',
-				'delete',
-			), true ) ) {
-				$this->result( $this->{$action}() );
-			}
-		}
-
-		/**
-		 * @return bool
-		 */
-		public function create() {
 			$data = vc_post_param( 'data' );
 			$shortcode = new Vc_Automap_Model( $data );
 
-			return $shortcode->save();
+			$this->result( $shortcode->save() );
 		}
 
-		/**
-		 * @return bool
-		 */
 		public function update() {
-			$id = vc_post_param( 'id' );
+			if ( ! vc_request_param( '_vcnonce' ) ) {
+				return;
+			}
+			vc_user_access()->checkAdminNonce()->validateDie()->wpAny( 'manage_options' )->validateDie()->part( 'settings' )->can( 'vc-automapper-tab' )->validateDie();
+
+			$id = (int) vc_post_param( 'id' );
 			$data = vc_post_param( 'data' );
 			$shortcode = new Vc_Automap_Model( $id );
 			if ( ! isset( $data['params'] ) ) {
@@ -300,24 +298,28 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 			}
 			$shortcode->set( $data );
 
-			return $shortcode->save();
+			$this->result( $shortcode->save() );
 		}
 
-		/**
-		 * @return bool
-		 */
 		public function delete() {
+			if ( ! vc_request_param( '_vcnonce' ) ) {
+				return;
+			}
+			vc_user_access()->checkAdminNonce()->validateDie()->wpAny( 'manage_options' )->validateDie()->part( 'settings' )->can( 'vc-automapper-tab' )->validateDie();
+
 			$id = vc_post_param( 'id' );
 			$shortcode = new Vc_Automap_Model( $id );
 
-			return $shortcode->delete();
+			$this->result( $shortcode->delete() );
 		}
 
-		/**
-		 * @return array
-		 */
 		public function read() {
-			return Vc_Automap_Model::findAll();
+			if ( ! vc_request_param( '_vcnonce' ) ) {
+				return;
+			}
+			vc_user_access()->checkAdminNonce()->validateDie()->wpAny( 'manage_options' )->validateDie()->part( 'settings' )->can( 'vc-automapper-tab' )->validateDie();
+
+			$this->result( Vc_Automap_Model::findAll() );
 		}
 
 		/**
@@ -326,9 +328,11 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 		 * @param $data
 		 */
 		public function result( $data ) {
-			// @codingStandardsIgnoreLine
-			echo is_array( $data ) || is_object( $data ) ? wp_json_encode( $data ) : $data;
-			die();
+			if ( false !== $data ) {
+				wp_send_json_success( $data );
+			} else {
+				wp_send_json_error( $data );
+			}
 		}
 
 		/**

@@ -130,12 +130,13 @@ class Vc_Edit_Form_Fields {
 	 */
 	public function enqueueScripts() {
 		$output = '';
-		if ( ! WpbakeryShortcodeParams::isEnqueue() ) {
-			$scripts = apply_filters( 'vc_edit_form_enqueue_script', WpbakeryShortcodeParams::getScripts() );
+		$scripts = apply_filters( 'vc_edit_form_enqueue_script', WpbakeryShortcodeParams::getScripts() );
+		if ( is_array( $scripts ) ) {
 			foreach ( $scripts as $script ) {
+				$custom_tag = 'script';
 				// @todo Check posibility to use wp_add_inline_script
 				// @codingStandardsIgnoreLine
-				$output .= '<script type="text/javascript" src="' . esc_url( $script ) . '"></script>';
+				$output .= '<' . $custom_tag . ' src="' . esc_url( $script ) . '"></' . $custom_tag . '>';
 			}
 		}
 
@@ -214,9 +215,9 @@ class Vc_Edit_Form_Fields {
 		if ( in_array( $this->tag, $saveAsTemplateElements, true ) && vc_user_access()->part( 'templates' )->checkStateAny( true, null )->get() ) {
 			$show_settings = true;
 		}
-
-		$output .= sprintf( '<script type="text/javascript">window.vc_presets_show=%s;</script>', $show_presets ? 'true' : 'false' );
-		$output .= sprintf( '<script type="text/javascript">window.vc_settings_show=%s;</script>', $show_presets || $show_settings ? 'true' : 'false' );
+		$custom_tag = 'script';
+		$output .= sprintf( '<' . $custom_tag . '>window.vc_presets_show=%s;</' . $custom_tag . '>', $show_presets ? 'true' : 'false' );
+		$output .= sprintf( '<' . $custom_tag . '>window.vc_settings_show=%s;</' . $custom_tag . '>', $show_presets || $show_settings ? 'true' : 'false' );
 
 		if ( ! empty( $deprecated ) ) {
 			$output .= '<div class="vc_row vc_ui-flex-row vc_shortcode-edit-form-deprecated-message"><div class="vc_col-sm-12 wpb_element_wrapper">' . vc_message_warning( sprintf( esc_html__( 'You are using outdated element, it is deprecated since version %s.', 'js_composer' ), $this->setting( 'deprecated' ) ) ) . '</div></div>';

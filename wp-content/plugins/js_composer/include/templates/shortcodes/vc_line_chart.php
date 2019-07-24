@@ -193,5 +193,4 @@ $output = '
 </div>' . '
 ';
 
-// @codingStandardsIgnoreLine
-echo $output;
+return $output;

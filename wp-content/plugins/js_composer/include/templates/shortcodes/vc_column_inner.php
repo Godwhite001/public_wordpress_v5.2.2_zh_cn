@@ -53,5 +53,4 @@ $output .= '</div>';
 $output .= '</div>';
 $output .= '</div>';
 
-// @codingStandardsIgnoreLine
 echo $output;

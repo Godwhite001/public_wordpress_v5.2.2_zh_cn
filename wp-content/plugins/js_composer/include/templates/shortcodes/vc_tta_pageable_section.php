@@ -36,5 +36,5 @@ if ( $isPageEditable ) {
 }
 $output .= '</div>';
 $output .= '</div>';
-// @codingStandardsIgnoreLine
-echo $output;
+
+return $output;

@@ -125,8 +125,7 @@ class Vc_Settings {
 
 		if ( ! vc_is_network_plugin() || ( vc_is_network_plugin() && is_network_admin() ) ) {
 			if ( ! vc_is_updater_disabled() ) {
-				if (!defined( 'JS_COMPOSER_THEME_CODE'))
-				    $this->tabs['vc-updater'] = esc_html__( 'Product License', 'js_composer' );
+				$this->tabs['vc-updater'] = esc_html__( 'Product License', 'js_composer' );
 			}
 		}
 		// TODO: may allow to disable automapper
@@ -479,11 +478,9 @@ class Vc_Settings {
 			$value = '';
 		}
 
-		// @codingStandardsIgnoreStart
-		echo '<textarea name="' . esc_attr( self::$field_prefix ) . 'custom_css' . '" class="wpb_csseditor custom_css" style="display:none">' . $value . '</textarea>';
-		echo '<pre id="wpb_csseditor" class="wpb_content_element custom_css" >' . $value . '</pre>';
+		echo '<textarea name="' . esc_attr( self::$field_prefix ) . 'custom_css' . '" class="wpb_csseditor custom_css" style="display:none">' . esc_textarea( $value ) . '</textarea>';
+		echo '<pre id="wpb_csseditor" class="wpb_content_element custom_css" >' . esc_textarea( $value ) . '</pre>';
 		echo '<p class="description indicator-hint">' . esc_html__( 'Add custom CSS code to the plugin without modifying files.', 'js_composer' ) . '</p>';
-		// @codingStandardsIgnoreEnd
 	}
 
 	/**

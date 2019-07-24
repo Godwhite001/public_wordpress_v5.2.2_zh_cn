@@ -63,7 +63,7 @@ $tabs = apply_filters( 'vc_add_element_categories', $tabs );
 					data-filter="<?php echo esc_attr( $v['filter'] ); ?>">
 			<?php
 			// @codingStandardsIgnoreLine
-			echo $v['name'];
+			print $v['name'];
 			?>
 			</button>
 		</li>

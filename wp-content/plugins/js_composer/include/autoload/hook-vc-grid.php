@@ -138,8 +138,7 @@ class Vc_Hooks_Vc_Grid {
 				$vc_grid = $shortcode_fishbone->shortcodeClass();
 				if ( method_exists( $vc_grid, 'isObjectPageable' ) && $vc_grid->isObjectPageable() && method_exists( $vc_grid, 'renderAjax' ) ) {
 					// @codingStandardsIgnoreLine
-					echo $vc_grid->renderAjax( vc_request_param( 'data' ) );
-					die;
+					wp_die( $vc_grid->renderAjax( vc_request_param( 'data' ) ) );
 				}
 			}
 		}

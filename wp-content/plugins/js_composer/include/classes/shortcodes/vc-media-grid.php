@@ -65,7 +65,7 @@ class WPBakeryShortCode_Vc_Media_Grid extends WPBakeryShortCode_Vc_Basic_Grid {
 			$grid_item = new Vc_Grid_Item();
 			$grid_item->setGridAttributes( $this->atts );
 			$grid_item->shortcodes();
-			$item = '[vc_gitem]<img src="' . vc_asset_url( 'vc/vc_gitem_image.png' ) . '">[/vc_gitem]';
+			$item = '[vc_gitem]<img src="' . esc_url( vc_asset_url( 'vc/vc_gitem_image.png' ) ) . '">[/vc_gitem]';
 			$grid_item->parseTemplate( $item );
 			$items = str_repeat( $grid_item->renderItem( get_post( (int) vc_request_param( 'vc_post_id' ) ) ), 3 );
 		}
@@ -121,7 +121,7 @@ class WPBakeryShortCode_Vc_Media_Grid extends WPBakeryShortCode_Vc_Basic_Grid {
 					'attach_id' => (int) $image,
 					'thumb_size' => 'thumbnail',
 				) );
-				$output .= ( $img ? '<li>' . $img['thumbnail'] . '</li>' : '<li><img width="150" height="150" src="' . vc_asset_url( 'vc/blank.gif' ) . '" class="attachment-thumbnail" alt="" title="" /></li>' );
+				$output .= ( $img ? '<li>' . $img['thumbnail'] . '</li>' : '<li><img width="150" height="150" src="' . esc_url( vc_asset_url( 'vc/blank.gif' ) ) . '" class="attachment-thumbnail" alt="" title="" /></li>' );
 			}
 			$output .= '</ul>';
 			$output .= '<a href="#" class="column_edit_trigger' . ( ! empty( $images_ids ) ? ' image-exists' : '' ) . '">' . esc_html__( 'Add images', 'js_composer' ) . '</a>';

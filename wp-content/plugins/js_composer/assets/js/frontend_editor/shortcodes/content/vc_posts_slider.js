@@ -1,4 +1,5 @@
 (function () {
+	'use strict';
 	window.InlineShortcodeView_vc_posts_slider = window.InlineShortcodeView.extend( {
 		render: function () {
 			var model_id = this.model.get( 'id' );

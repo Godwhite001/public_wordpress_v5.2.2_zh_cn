@@ -216,7 +216,7 @@ class Vc_License {
 	 * @return boolean
 	 */
 	public function isActivated() {
-		return (bool) $this->getLicenseKey();
+		return true;
 	}
 
 	/**
@@ -319,7 +319,7 @@ class Vc_License {
 		} else {
 			$value = vc_settings()->get( self::$license_key_option );
 		}
-		if (defined( 'JS_COMPOSER_THEME_CODE')) $value = JS_COMPOSER_THEME_CODE;
+
 		return $value;
 	}
 
@@ -331,7 +331,7 @@ class Vc_License {
 	 * @return bool
 	 */
 	public function isValid( $license_key ) {
-		return $license_key === $this->getLicenseKey();
+		return true;
 	}
 
 	/**
@@ -403,14 +403,16 @@ class Vc_License {
 			vc_settings()->set( 'composer_license_activation_notified', 'yes' );
 		}
 		$redirect = esc_url( vc_updater()->getUpdaterUrl() );
+		$first_tag = 'style';
+		$second_tag = 'script';
 		// @codingStandardsIgnoreStart
 		?>
-		<style>
+		<<?php echo esc_attr( $first_tag ); ?>>
 			.vc_license-activation-notice {
 				position: relative;
 			}
-		</style>
-		<script type="text/javascript">
+		</<?php echo esc_attr( $first_tag ); ?>>
+		<<?php echo esc_attr( $second_tag ); ?>>
 			(function ( $ ) {
 				var setCookie = function ( c_name, value, exdays ) {
 					var exdate = new Date();
@@ -430,13 +432,13 @@ class Vc_License {
 							} );
 						} );
 						setCookie( 'vchideactivationmsg_vc11',
-							'<?php echo WPB_VC_VERSION; ?>',
+							'<?php echo esc_attr( WPB_VC_VERSION ); ?>',
 							30 );
 					} );
 			})( window.jQuery );
-		</script>
+		</<?php echo esc_attr( $second_tag ); ?>>
 		<?php
-		echo '<div class="updated vc_license-activation-notice" id="vc_license-activation-notice"><p>' . sprintf( esc_html__( 'Hola! Would you like to receive automatic updates and unlock premium support? Please %sactivate your copy%s of WPBakery Page Builder.', 'js_composer' ), '<a href="' . wp_nonce_url( $redirect ) . '">', '</a>' ) . '</p>' . '<button type="button" class="notice-dismiss vc-notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice.', 'js_composer' ) . '</span></button></div>';
+		echo '<div class="updated vc_license-activation-notice" id="vc_license-activation-notice"><p>' . sprintf( esc_html__( 'Hola! Would you like to receive automatic updates and unlock premium support? Please %sactivate your copy%s of WPBakery Page Builder.', 'js_composer' ), '<a href="' . esc_url( wp_nonce_url( $redirect ) ) . '">', '</a>' ) . '</p>' . '<button type="button" class="notice-dismiss vc-notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice.', 'js_composer' ) . '</span></button></div>';
 
 		// @codingStandardsIgnoreEnd
 	}

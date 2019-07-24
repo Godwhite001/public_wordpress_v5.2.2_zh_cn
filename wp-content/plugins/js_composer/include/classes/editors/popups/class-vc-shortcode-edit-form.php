@@ -68,8 +68,9 @@ class Vc_Shortcode_Edit_Form {
 
 		require_once vc_path_dir( 'EDITORS_DIR', 'class-vc-edit-form-fields.php' );
 		$fields = new Vc_Edit_Form_Fields( $tag, $params );
-		$fields->render();
-		die();
+		$output = $fields->render();
+		// @codingStandardsIgnoreLine
+		wp_die( $output );
 	}
 
 	/**

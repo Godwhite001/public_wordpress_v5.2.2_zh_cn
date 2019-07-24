@@ -46,5 +46,5 @@ $output .= '<' . $font_container_data['values']['tag'] . ' ' . $style . ' >';
 $output .= $content;
 $output .= '</' . $font_container_data['values']['tag'] . '>';
 $output .= '</div>';
-// @codingStandardsIgnoreLine
-echo $output;
+
+return $output;

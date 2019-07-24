@@ -42,12 +42,11 @@ $wrapper_css_class = 'vc_button-2-wrapper';
 if ( $align ) {
 	$wrapper_css_class .= ' vc_button-2-align-' . $align;
 }
-?>
-<div class="<?php echo esc_attr( $wrapper_css_class ); ?>">
-	<a class="<?php echo esc_attr( trim( $css_class ) ); ?>" href="<?php echo esc_attr( $a_href ); ?>" title="<?php echo esc_attr( $a_title ); ?>" target="<?php echo esc_attr( $a_target ); ?>"<?php echo ! empty( $a_rel ) ? ' rel="' . esc_attr( trim( $a_rel ) ) . '"' : ''; ?>>
-		<?php
-		// @codingStandardsIgnoreLine
-		echo $title;
-		?>
-	</a>
-</div>
+$output = '';
+
+$output .= '
+<div class="' . esc_attr( $wrapper_css_class ) . '"><a class="' . esc_attr( trim( $css_class ) ) . '" href="' . esc_attr( $a_href ) . '" title="' . esc_attr( $a_title ) . '" target="' . esc_attr( $a_target ) . '"' . ( ! empty( $a_rel ) ? ' rel="' . esc_attr( trim( $a_rel ) ) . '"' : '' ) . '>';
+$output .= $title;
+$output .= '</a></div>';
+
+return $output;

@@ -67,12 +67,8 @@ class Vc_Page {
 	}
 
 	public function render() {
-		ob_start();
 		vc_include_template( $this->getTemplatePath(), array(
 			'page' => $this,
 		) );
-
-		// @codingStandardsIgnoreLine
-		echo apply_filters( 'vc_settings-page-render-' . $this->getSlug(), ob_get_clean(), $this );
 	}
 }

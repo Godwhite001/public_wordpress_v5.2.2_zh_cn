@@ -1,4 +1,5 @@
 (function () {
+	'use strict';
 	window.InlineShortcodeView_vc_raw_js = window.InlineShortcodeView.extend( {
 		render: function () {
 			window.InlineShortcodeView_vc_raw_js.__super__.render.call( this );

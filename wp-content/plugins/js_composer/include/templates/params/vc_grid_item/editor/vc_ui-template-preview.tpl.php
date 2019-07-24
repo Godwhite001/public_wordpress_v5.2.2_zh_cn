@@ -34,8 +34,10 @@ add_thickbox();
 wp_enqueue_media( array( 'post' => $post_ID ) );
 visual_composer()->templatesPanelEditor()->registerPreviewScripts();
 require_once ABSPATH . 'wp-admin/admin-header.php';
+$custom_tag = 'script';
+$first_tag = 'style';
 ?>
-	<style type="text/css">
+	<<?php echo esc_attr( $first_tag ); ?>>
 		#screen-meta, #adminmenumain, .notice, #wpfooter, #message, .updated {
 			display: none !important;
 		}
@@ -55,13 +57,13 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 			overflow: hidden;
 			background: transparent;
 		}
-	</style>
+	</<?php echo esc_attr( $first_tag ); ?>>
 	<div class="vc_not-remove-overlay"></div>
 	<div class="vc_ui-template-preview">
 		<textarea id="content" style="display: none;">
 			<?php
 			// @codingStandardsIgnoreLine
-			echo $content;
+			print $content;
 			?>
 		</textarea>
 
@@ -82,7 +84,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 		<input type="hidden" id="wpb_vc_loading" name="wpb_vc_loading" value="<?php esc_attr_e( 'Loading, please wait...', 'js_composer' ); ?>"/>
 		<input type="hidden" id="wpb_vc_loading_row" name="wpb_vc_loading_row" value="<?php esc_attr_e( 'Crunching...', 'js_composer' ); ?>"/>
 	</div>
-	<script type="text/javascript">
+	<<?php echo esc_attr( $custom_tag ); ?>>
 		/**
 		 * Get content of grid item editor of current post. Data is used as models collection of shortcodes.
 		 * Data always wrapped with vc_gitem shortcode.
@@ -117,7 +119,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 			'[/vc_gitem_zone_b]' +
 			'[/vc_gitem_animated_block]' +
 			'[/vc_gitem]';
-	</script>
+	</<?php echo esc_attr( $custom_tag ); ?>>
 <?php
 vc_include_template( 'editors/partials/backend-shortcodes-templates.tpl.php' );
 do_action( 'vc_backend_editor_render' );

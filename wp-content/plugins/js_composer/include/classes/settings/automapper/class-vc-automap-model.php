@@ -50,7 +50,7 @@ if ( ! class_exists( 'Vc_Automap_Model' ) ) {
 				$this->data = stripslashes_deep( $data );
 			}
 			foreach ( $this->vars as $var ) {
-				$this->$var = $this->get( $var );
+				$this->{$var} = $this->get( $var );
 			}
 		}
 
@@ -108,7 +108,7 @@ if ( ! class_exists( 'Vc_Automap_Model' ) ) {
 					$this->set( $key, $value );
 				}
 			} elseif ( ! is_null( $value ) ) {
-				$this->$attr = $value;
+				$this->{$attr} = $value;
 			}
 		}
 
@@ -120,7 +120,7 @@ if ( ! class_exists( 'Vc_Automap_Model' ) ) {
 				return false;
 			}
 			foreach ( $this->vars as $var ) {
-				$this->data[ $var ] = $this->$var;
+				$this->data[ $var ] = $this->{$var};
 			}
 
 			return $this->saveOption();
@@ -162,7 +162,7 @@ if ( ! class_exists( 'Vc_Automap_Model' ) ) {
 		protected function deleteOption() {
 			unset( self::$option_data[ $this->id ] );
 
-			return update_option( self::$option_name, self::$option_data );
+			return delete_option( self::$option_name );
 		}
 	}
 }

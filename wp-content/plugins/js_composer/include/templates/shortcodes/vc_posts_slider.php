@@ -167,7 +167,7 @@ while ( $my_query->have_posts() ) {
 	// Link logic
 	if ( 'link_no' !== $link ) {
 		if ( 'link_post' === $link ) {
-			$link_image_start = '<a class="link_image" href="' . get_permalink( $post_id ) . '" title="' . sprintf( esc_attr__( 'Permalink to %s', 'js_composer' ), the_title_attribute( 'echo=0' ) ) . '">';
+			$link_image_start = '<a class="link_image" href="' . esc_url( get_permalink( $post_id ) ) . '" title="' . sprintf( esc_attr__( 'Permalink to %s', 'js_composer' ), the_title_attribute( 'echo=0' ) ) . '">';
 		} elseif ( 'link_image' === $link ) {
 			$p_video = get_post_meta( $post_id, '_p_video', true );
 			if ( '' !== $p_video ) {
@@ -175,14 +175,14 @@ while ( $my_query->have_posts() ) {
 			} else {
 				$p_link = $p_img_large[0];
 			}
-			$link_image_start = '<a class="link_image prettyphoto" href="' . $p_link . '" ' . $pretty_rel_random . ' title="' . the_title_attribute( 'echo=0' ) . '" >';
+			$link_image_start = '<a class="link_image prettyphoto" href="' . esc_url( $p_link ) . '" ' . $pretty_rel_random . ' title="' . the_title_attribute( 'echo=0' ) . '" >';
 		} elseif ( 'custom_link' === $link ) {
 			if ( isset( $custom_links[ $i ] ) ) {
 				$slide_custom_link = $custom_links[ $i ];
 			} else {
 				$slide_custom_link = $custom_links[0];
 			}
-			$link_image_start = '<a class="link_image" href="' . $slide_custom_link . '">';
+			$link_image_start = '<a class="link_image" href="' . esc_url( $slide_custom_link ) . '">';
 		}
 
 		$link_image_end = '</a>';
@@ -231,5 +231,4 @@ $output = '
 	</div>
 ';
 
-// @codingStandardsIgnoreLine
-echo $output;
+return $output;

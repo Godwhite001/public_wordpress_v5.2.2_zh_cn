@@ -31,7 +31,7 @@ switch ( $source ) {
 		$custom_src = $custom_src ? esc_attr( $custom_src ) : $default_src;
 
 		$img = array(
-			'thumbnail' => '<img class="vc_single_image-img" ' . $hwstring . ' src="' . $custom_src . '" />',
+			'thumbnail' => '<img class="vc_single_image-img" ' . $hwstring . ' src="' . esc_url( $custom_src ) . '" />',
 		);
 		break;
 
@@ -40,7 +40,7 @@ switch ( $source ) {
 }
 
 if ( ! $img ) {
-	$img['thumbnail'] = '<img class="vc_single_image-img" src="' . $default_src . '" />';
+	$img['thumbnail'] = '<img class="vc_single_image-img" src="' . esc_url( $default_src ) . '" />';
 }
 
 $wrapperClass = 'vc_single_image-wrapper ' . $style . ' ' . $border_color;
@@ -64,5 +64,4 @@ $output = '
 	</div>
 ';
 
-// @codingStandardsIgnoreLine
-echo $output;
+return $output;

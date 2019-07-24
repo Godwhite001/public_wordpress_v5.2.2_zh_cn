@@ -3,6 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 preg_match( '/^(\d+)(\.\d+)?/', WPB_VC_VERSION, $matches );
+$custom_tag = 'script'; // Update to wp_add_inline later
 ?>
 <div class="wrap vc-page-welcome about-wrap">
 	<h1><?php echo sprintf( esc_html__( 'Welcome to WPBakery Page Builder %s', 'js_composer' ), esc_html( isset( $matches[0] ) ? $matches[0] : WPB_VC_VERSION ) ); ?></h1>
@@ -28,7 +29,7 @@ preg_match( '/^(\d+)(\.\d+)?/', WPB_VC_VERSION, $matches );
 			data-via="wpbakery"
 			data-text="Take full control over your #WordPress site with WPBakery Page Builder page builder"
 			data-url="https://wpbakery.com" data-size="large">Tweet</a>
-		<script>! function ( d, s, id ) {
+		<<?php echo esc_attr( $custom_tag ); ?>>! function ( d, s, id ) {
 				var js, fjs = d.getElementsByTagName( s )[ 0 ], p = /^http:/.test( d.location ) ? 'http' : 'https';
 				if ( ! d.getElementById( id ) ) {
 					js = d.createElement( s );
@@ -36,7 +37,7 @@ preg_match( '/^(\d+)(\.\d+)?/', WPB_VC_VERSION, $matches );
 					js.src = p + '://platform.twitter.com/widgets.js';
 					fjs.parentNode.insertBefore( js, fjs );
 				}
-			}( document, 'script', 'twitter-wjs' );</script>
+			}( document, 'script', 'twitter-wjs' );</<?php echo esc_attr( $custom_tag ); ?>>
 	</p>
 	<?php
 	vc_include_template( '/pages/partials/_tabs.php', array(
@@ -47,6 +48,6 @@ preg_match( '/^(\d+)(\.\d+)?/', WPB_VC_VERSION, $matches );
 	?>
 	<?php
 	// @codingStandardsIgnoreLine
-	echo $active_page->render();
+	print $active_page->render();
 	?>
 </div>

@@ -3,8 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 
+$custom_tag = 'script';
 ?>
-<script type="text/html" id="vc_controls-template-default">
+<<?php echo esc_attr( $custom_tag ); ?> type="text/html" id="vc_controls-template-default">
 	<div
 		class="vc_controls-element" data-can-all="{{ can_all }}" data-can-edit="{{ can_edit }}">
 		<div class="vc_controls-cc">
@@ -26,8 +27,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 					class="vc_btn-content"><i class="vc-composer-icon vc-c-icon-delete_empty"></i></span></a>{# } #}
 		</div>
 	</div>
-</script>
-<script type="text/html" id="vc_controls-template-container">
+</<?php echo esc_attr( $custom_tag ); ?>>
+<<?php echo esc_attr( $custom_tag ); ?> type="text/html" id="vc_controls-template-container">
 	<div class="vc_controls-container">
 		<div class="vc_controls-out-tl">
 			<div class="vc_element element-{{ tag }}">
@@ -59,8 +60,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 		{# } #}
 	</div><!-- end vc_controls-column -->
-</script>
-<script type="text/html" id="vc_controls-template-container-width-parent">
+</<?php echo esc_attr( $custom_tag ); ?>>
+<<?php echo esc_attr( $custom_tag ); ?> type="text/html" id="vc_controls-template-container-width-parent">
 	<div class="vc_controls-column">
 		<div class="vc_controls-out-tl">
 			<div class="vc_parent parent-{{ parent_tag }}"><a
@@ -114,8 +115,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 		{# } #}
 	</div><!-- end vc_controls-column -->
-</script>
-<script type="text/html" id="vc_controls-template-vc_column">
+</<?php echo esc_attr( $custom_tag ); ?>>
+<<?php echo esc_attr( $custom_tag ); ?> type="text/html" id="vc_controls-template-vc_column">
 	<div class="vc_controls-column">
 		<div class="vc_controls-out-tl">
 			<div class="vc_parent parent-{{ parent_tag }}"><a
@@ -175,9 +176,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 		{# } #}
 	</div><!-- end vc_controls-column -->
-</script>
-
-<script type="text/html" id="vc_controls-template-vc_tab">
+</<?php echo esc_attr( $custom_tag ); ?>>
+<<?php echo esc_attr( $custom_tag ); ?> type="text/html" id="vc_controls-template-vc_tab">
 	<div class="vc_controls-column">
 		<div class="vc_controls-out-tr">
 			<div class="vc_parent parent-{{ parent_tag }}"><a
@@ -238,8 +238,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 		{# } #}
 	</div><!-- end vc_controls-column -->
-</script>
-<script type="text/html" id="vc_controls-template-vc_tta_section">
+</<?php echo esc_attr( $custom_tag ); ?>>
+<<?php echo esc_attr( $custom_tag ); ?> type="text/html" id="vc_controls-template-vc_tta_section">
 	<div class="vc_controls-container">
 		<div class="vc_controls-out-tr">
 			<div class="vc_parent parent-{{ parent_tag }}"><a
@@ -308,4 +308,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 		{# } #}
 	</div><!-- end vc_controls-vc_tta_section -->
-</script>
+</<?php echo esc_attr( $custom_tag ); ?>>

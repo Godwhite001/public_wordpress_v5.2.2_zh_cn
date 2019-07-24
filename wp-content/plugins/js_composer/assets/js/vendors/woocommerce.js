@@ -17,7 +17,7 @@ if ( !window.ajaxurl ) {
 				$empty.parent().remove();
 				$( '.edit_form_line', $filterDropdown ).prepend( $( '<div class="vc_checkbox-label"><span>No values found</span></div>' ) );
 			}
-			$( 'select[name="attribute"]', that.$content ).change( function () {
+			$( 'select[name="attribute"]', that.$content ).on( 'change', function () {
 				$( '.vc_checkbox-label', $filterDropdown ).remove();
 				$filterDropdown.removeClass( 'vc_dependent-hidden' );
 

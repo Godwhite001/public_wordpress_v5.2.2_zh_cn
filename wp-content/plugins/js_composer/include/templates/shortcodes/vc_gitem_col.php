@@ -30,4 +30,6 @@ $css_class = $width . ( strlen( $el_class ) ? ' ' . $el_class : '' ) . ' vc_gite
 if ( 'yes' === $featured_image ) {
 	$style = '{{ post_image_background_image_css' . ':' . esc_attr( $img_size ) . ' }}';
 }
-echo '<div class="' . esc_attr( $css_class ) . '"' . ( strlen( $style ) > 0 ? ' style="' . esc_attr( $style ) . '"' : '' ) . '>' . do_shortcode( $content ) . '</div>';
+$output = '<div class="' . esc_attr( $css_class ) . '"' . ( strlen( $style ) > 0 ? ' style="' . esc_attr( $style ) . '"' : '' ) . '>' . do_shortcode( $content ) . '</div>';
+
+echo $output;

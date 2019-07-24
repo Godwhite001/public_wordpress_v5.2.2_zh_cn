@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once vc_path_dir( 'PARAMS_DIR', 'vc_grid_item/editor/navbar/class-vc-navbar-grid-item.php' );
 $nav_bar = new Vc_Navbar_Grid_Item( $post );
 $nav_bar->render();
-
+$custom_tag = 'script';
 ?>
 <div class="metabox-composer-content">
 	<div id="visual_composer_content" class="wpb_main_sortable main_wrapper"
@@ -19,8 +19,8 @@ $nav_bar->render();
 <input type="hidden" id="wpb_vc_loading_row" name="wpb_vc_loading_row"
 	value="<?php esc_html_e( 'Crunching...', 'js_composer' ); ?>"/>
 <input type="hidden" name="vc_grid_item_editor" value="true"/>
-<script type="text/javascript">
-	var vc_post_id = <?php echo get_the_ID(); ?>;
+<<?php echo esc_attr( $custom_tag ); ?>>
+	window.vc_post_id = <?php echo get_the_ID(); ?>;
 	<?php
 	$vc_gitem_template = vc_request_param( 'vc_gitem_template' );
 	$template = Vc_Grid_Item::predefinedTemplate( $vc_gitem_template );
@@ -65,4 +65,4 @@ $nav_bar->render();
 		<?php
 	}
 	?>
-</script>
+</<?php echo esc_attr( $custom_tag ); ?>>

@@ -44,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$templates_block = apply_filters( 'vc_templates_render_category', $category );
 						if ( isset( $templates_block['output'] ) && is_string( $templates_block['output'] ) ) {
 							// @codingStandardsIgnoreLine
-							echo $templates_block['output'];
+							print $templates_block['output'];
 						}
 						echo '</div>';
 						$first = false;

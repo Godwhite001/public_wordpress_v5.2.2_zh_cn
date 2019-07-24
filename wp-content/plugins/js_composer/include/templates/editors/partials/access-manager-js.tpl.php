@@ -3,8 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 
+$custom_tag = 'script';
 ?>
-<script type="text/javascript" id="vc_role_access_manager_script">
+<<?php echo esc_attr( $custom_tag ); ?> id="vc_role_access_manager_script">
 	(function ( $ ) {
 		var _localCapabilities, _check, _groupAccessRules, _shortcodesPartSet, _mergedCaps;
 		_localCapabilities = <?php echo wp_json_encode( vc_user_roles_get_all() ); ?>;
@@ -93,4 +94,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 			};
 		};
 	})( window.jQuery );
-</script>
+</<?php echo esc_attr( $custom_tag ); ?>>

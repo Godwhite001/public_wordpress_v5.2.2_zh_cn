@@ -29,7 +29,7 @@ class Vc_Updater {
 	/**
 	 * @var string
 	 */
-	public $title = 'The7 WPBakery Page Builder';
+	public $title = 'WPBakery Page Builder';
 
 	/**
 	 * @var bool
@@ -75,15 +75,6 @@ class Vc_Updater {
 	 * @return array|boolean JSON response or false if request failed
 	 */
 	public function getDownloadUrl() {
-		if ( defined( 'JS_COMPOSER_THEME_ACTIVATED_URL' ) && class_exists( 'The7_Remote_API' ) && function_exists( 'presscore_get_purchase_code' ) ) {
-			$the7_remote_api = new The7_Remote_API( presscore_get_purchase_code() );
-
-			return array(
-				'status' => 200,
-				'url'    => $the7_remote_api->get_plugin_download_url( 'js_composer' ),
-			);
-		}
-
 		$url = $this->getUrl();
 		// FIX SSL SNI
 		$filter_add = true;
@@ -153,9 +144,9 @@ class Vc_Updater {
 			if ( vc_is_as_theme() && vc_get_param( 'action' ) !== 'update-selected' ) {
 				return false;
 			}
-			$url = esc_url( self::getUpdaterUrl() );
+			$url = self::getUpdaterUrl();
 
-			return new WP_Error( 'no_credentials', sprintf( esc_html__( 'To receive automatic updates license activation is required. Please visit %sSettings%s to activate your WPBakery Page Builder.', 'js_composer' ), '<a href="' . $url . '" target="_blank">', '</a>' ) . ' ' . sprintf( ' <a href="http://go.wpbakery.com/faq-update-in-theme" target="_blank">%s</a>', esc_html__( 'Got WPBakery Page Builder in theme?', 'js_composer' ) ) );
+			return new WP_Error( 'no_credentials', sprintf( esc_html__( 'To receive automatic updates license activation is required. Please visit %sSettings%s to activate your WPBakery Page Builder.', 'js_composer' ), '<a href="' . esc_url( $url ) . '" target="_blank">', '</a>' ) . ' ' . sprintf( ' <a href="https://go.wpbakery.com/faq-update-in-theme" target="_blank">%s</a>', esc_html__( 'Got WPBakery Page Builder in theme?', 'js_composer' ) ) );
 		}
 
 		$updater->strings['downloading_package_url'] = esc_html__( 'Getting download link...', 'js_composer' );

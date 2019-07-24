@@ -94,8 +94,9 @@ abstract class WPBakeryShortCode extends WPBakeryVisualComposerAbstract {
 		if ( ! filter_var( $this->settings( 'icon' ), FILTER_VALIDATE_URL ) ) {
 			return;
 		}
+		$first_tag = 'style';
 		echo '
-            <style>
+            <' . esc_attr( $first_tag ) . '>
                 .vc_el-container #' . esc_attr( $this->settings['base'] ) . ' .vc_element-icon,
                 .wpb_' . esc_attr( $this->settings['base'] ) . ' > .wpb_element_wrapper > .wpb_element_title > .vc_element-icon,
                 .vc_el-container > #' . esc_attr( $this->settings['base'] ) . ' > .vc_element-icon,
@@ -114,7 +115,7 @@ abstract class WPBakeryShortCode extends WPBakeryVisualComposerAbstract {
                     -o-background-size: contain;
                     background-size: contain;
                 }
-            </style>';
+            </' . esc_attr( $first_tag ) . '>';
 	}
 
 	/**
@@ -260,17 +261,18 @@ abstract class WPBakeryShortCode extends WPBakeryVisualComposerAbstract {
 			$content = apply_filters( 'vc_shortcode_content_filter', $content, $this->shortcode );
 		}
 		$this->findShortcodeTemplate();
-		if ( $this->html_template ) {
+		if ( $this->html_template && file_exists( $this->html_template ) ) {
 			ob_start();
 			/** @var string $content - used inside template */
-			require $this->html_template;
-			$output = ob_get_contents();
+			$output = require $this->html_template;
+			// Allow return in template files
+			if ( 1 === $output ) {
+				$output = ob_get_contents();
+			}
 			ob_end_clean();
-		} else {
-			throw new Exception( sprintf( esc_html__( 'Template file is missing for `%s` shortcode. Make sure you have `%s` file in your theme folder.', 'js_composer' ), $this->shortcode, 'wp-content/themes/your_theme/vc_templates/' . $this->shortcode . '.php' ) );
 		}
 
-		return apply_filters( 'vc_shortcode_content_filter_after', $output, $this->shortcode );
+		return apply_filters( 'vc_shortcode_content_filter_after', $output, $this->shortcode, $atts, $content );
 	}
 
 	/**
@@ -682,7 +684,7 @@ abstract class WPBakeryShortCode extends WPBakeryVisualComposerAbstract {
 				'img',
 				'iframe',
 			), true ) ) {
-				$output .= '<' . $param['holder'] . ' class="wpb_vc_param_value ' . $param_name . ' ' . $type . ' ' . $class . '" name="' . $param_name . '" src="' . $value . '">';
+				$output .= '<' . $param['holder'] . ' class="wpb_vc_param_value ' . $param_name . ' ' . $type . ' ' . $class . '" name="' . $param_name . '" src="' . esc_url( $value ) . '">';
 			} elseif ( 'hidden' !== $param['holder'] ) {
 				$output .= '<' . $param['holder'] . ' class="wpb_vc_param_value ' . $param_name . ' ' . $type . ' ' . $class . '" name="' . $param_name . '">' . $value . '</' . $param['holder'] . '>';
 			}

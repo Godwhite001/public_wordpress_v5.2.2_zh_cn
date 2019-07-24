@@ -16,4 +16,6 @@ extract( $atts );
 
 $css = $this->getExtraClass( $el_class );
 
-echo '<div class="vc_items' . esc_attr( $css ) . '">' . esc_html__( 'Item', 'js_composer' ) . '</div>';
+$output = '<div class="vc_items' . esc_attr( $css ) . '">' . esc_html__( 'Item', 'js_composer' ) . '</div>';
+
+return $output;

@@ -57,10 +57,10 @@ $css_class = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, 'wpb_button ' . 
 
 if ( '' !== $href ) {
 	$output .= '<span class="' . esc_attr( $css_class ) . '">' . $title . $i_icon . '</span>';
-	$output = '<a class="wpb_button_a' . esc_attr( $a_class ) . '" title="' . esc_attr( $title ) . '" href="' . esc_attr( $href ) . '"' . $target . '>' . $output . '</a>';
+	$output = '<a class="wpb_button_a' . esc_attr( $a_class ) . '" title="' . esc_attr( $title ) . '" href="' . esc_url( $href ) . '"' . $target . '>' . $output . '</a>';
 } else {
 	$output .= '<button class="' . esc_attr( $css_class ) . '">' . $title . $i_icon . '</button>';
 
 }
-// @codingStandardsIgnoreLine
-echo $output;
+
+return $output;

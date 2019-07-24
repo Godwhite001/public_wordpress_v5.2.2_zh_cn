@@ -52,7 +52,7 @@ if ( '' !== $el_class ) {
 
 if ( '' !== $href ) {
 	$button = '<span class="wpb_button ' . esc_attr( $color . $size . $icon ) . '">' . $title . $i_icon . '</span>';
-	$button = '<a class="wpb_button_a' . esc_attr( $a_class ) . '" href="' . $href . '"' . $target . '>' . $button . '</a>';
+	$button = '<a class="wpb_button_a' . esc_attr( $a_class ) . '" href="' . esc_url( $href ) . '"' . $target . '>' . $button . '</a>';
 } else {
 	$button = '';
 	$el_class .= ' cta_no_button';
@@ -70,5 +70,4 @@ if ( 'cta_align_bottom' === $position ) {
 }
 $output .= '</div>';
 
-// @codingStandardsIgnoreLine
-echo $output;
+return $output;

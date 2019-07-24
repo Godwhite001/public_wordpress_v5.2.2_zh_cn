@@ -30,19 +30,18 @@ $wrapper_attributes = array();
 if ( ! empty( $el_id ) ) {
 	$wrapper_attributes[] = 'id="' . esc_attr( $el_id ) . '"';
 }
+$custom_tag = 'script';
 // @codingStandardsIgnoreStarts
 $output = '
 	<div class="' . esc_attr( $css_class ) . '" ' . implode( ' ', $wrapper_attributes ) . '>
 		<div class="wpb_wrapper">
 			' . wpb_widget_title( array(
-	'title' => $title,
-	'extraclass' => 'wpb_flickr_heading',
-) ) . '
-			<script type="text/javascript" src="//www.flickr.com/badge_code_v2.gne?count=' . esc_attr( $count ) . '&amp;display=' . esc_attr( $display ) . '&amp;size=s&amp;layout=x&amp;source=' . esc_attr( $type ) . '&amp;' . esc_attr( $type ) . '=' . esc_attr( $flickr_id ) . '"></script>
-			<p class="flickr_stream_wrap"><a class="wpb_follow_btn wpb_flickr_stream" href="//www.flickr.com/photos/' . esc_attr( $flickr_id ) . '">' . esc_html__( 'View stream on flickr', 'js_composer' ) . '</a></p>
+		'title' => $title,
+		'extraclass' => 'wpb_flickr_heading',
+	) ) . '<' . $custom_tag . ' src="https://www.flickr.com/badge_code_v2.gne?count=' . esc_attr( $count ) . '&amp;display=' . esc_attr( $display ) . '&amp;size=s&amp;layout=x&amp;source=' . esc_attr( $type ) . '&amp;' . esc_attr( $type ) . '=' . esc_attr( $flickr_id ) . '"></' . $custom_tag . '>
+			<p class="flickr_stream_wrap"><a class="wpb_follow_btn wpb_flickr_stream" href="https://www.flickr.com/photos/' . esc_attr( $flickr_id ) . '">' . esc_html__( 'View stream on flickr', 'js_composer' ) . '</a></p>
 		</div>
 	</div>
 ';
 
-echo $output;
-// @codingStandardsIgnoreEnds
+return $output;

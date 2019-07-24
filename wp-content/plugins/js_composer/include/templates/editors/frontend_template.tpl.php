@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	?>
 	<?php
 	// @codingStandardsIgnoreLine
-	echo apply_filters( 'vc_frontend_template_the_content', $editor->parseShortcodesString( $editor->getTemplateContent() ) );
+	print apply_filters( 'vc_frontend_template_the_content', $editor->parseShortcodesString( $editor->getTemplateContent() ) );
 	?>
 	<div data-type="files">
 		<?php

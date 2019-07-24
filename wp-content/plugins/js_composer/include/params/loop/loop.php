@@ -17,10 +17,10 @@ function vc_loop_form_field( $settings, $value ) {
 	$parsed_value = array();
 	if ( is_array( $params ) ) {
 		foreach ( $params as $key => $param ) {
-			$param_value = vc_loop_get_value( $param );
-			if ( ! empty( $param_value ) ) {
-				$parsed_value[] = $key . ':' . $param_value;
-				$loop_info .= ' <b>' . $query_builder->getLabel( $key ) . '</b>: ' . $param_value . ';';
+			$param_value_render = vc_loop_get_value( $param );
+			if ( ! empty( $param_value_render ) ) {
+				$parsed_value[] = $key . ':' . ( is_array( $param['value'] ) ? implode( ',', $param['value'] ) : $param['value'] );
+				$loop_info .= ' <b>' . $query_builder->getLabel( $key ) . '</b>: ' . $param_value_render . ';';
 			}
 		}
 	}
@@ -437,7 +437,7 @@ class VcLoopSettings {
 	 */
 	protected function parseMultiSelect( $value, $options = array() ) {
 		return array(
-			'value' => explode( ',', $value ),
+			'value' => explode( ',', trim( $value, ',' ) ),
 			'options' => $options,
 		);
 	}

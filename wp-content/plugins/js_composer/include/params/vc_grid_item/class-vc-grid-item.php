@@ -254,9 +254,10 @@ class Vc_Grid_Item {
 		}
 		if ( ! empty( $shortcodes_custom_css ) ) {
 			$shortcodes_custom_css = wp_strip_all_tags( $shortcodes_custom_css );
-			$output .= '<style type="text/css" data-type="vc_shortcodes-custom-css">';
+			$first_tag = 'style';
+			$output .= '<' . $first_tag . ' data-type="vc_shortcodes-custom-css">';
 			$output .= $shortcodes_custom_css;
-			$output .= '</style>';
+			$output .= '</' . $first_tag . '>';
 		}
 
 		return $output;

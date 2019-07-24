@@ -52,8 +52,8 @@ class WPBakeryShortCode_Vc_Flickr extends WPBakeryShortCode {
 			<div class="%s">
 				<div class="wpb_wrapper">
 					%s
-					<div class="vc_flickr-inline-placeholder" data-link="http://www.flickr.com/badge_code_v2.gne?count=%s&amp;display=%s&amp;size=s&amp;layout=x&amp;source=%s&amp;%s=%s"></div>
-					<p class="flickr_stream_wrap"><a class="wpb_follow_btn wpb_flickr_stream" href="http://www.flickr.com/photos/%s">%s</a></p>
+					<div class="vc_flickr-inline-placeholder" data-link="https://www.flickr.com/badge_code_v2.gne?count=%s&amp;display=%s&amp;size=s&amp;layout=x&amp;source=%s&amp;%s=%s"></div>
+					<p class="flickr_stream_wrap"><a class="wpb_follow_btn wpb_flickr_stream" href="https://www.flickr.com/photos/%s">%s</a></p>
 				</div>
 			</div>', $css_class, wpb_widget_title( $params ), $count, $display, $type, $type, $flickr_id, $flickr_id, esc_html__( 'View stream on flickr', 'js_composer' ) );
 

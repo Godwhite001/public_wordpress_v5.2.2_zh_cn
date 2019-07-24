@@ -25,14 +25,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<div class="wpb_element_wrapper">
 								<?php
 								// @codingStandardsIgnoreLine
-								echo vc_message_warning( esc_html__( 'Elements within this list are deprecated and are no longer supported in newer versions of WPBakery Page Builder.', 'js_composer' ) );
+								print vc_message_warning( esc_html__( 'Elements within this list are deprecated and are no longer supported in newer versions of WPBakery Page Builder.', 'js_composer' ) );
 								?>
 							</div>
 						</li>
 						<li>
 							<?php
 							// @codingStandardsIgnoreLine
-							echo $box->getControls();
+							print $box->getControls();
 							?>
 						</li>
 						<?php if ( $box->isShowEmptyMessage() && true !== $box->getPartState() ) : ?>
@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<div class="wpb_element_wrapper">
 									<?php
 									// @codingStandardsIgnoreLine
-									echo vc_message_warning( esc_html__( 'Your user role have restricted access to content elements. If required, contact your site administrator to change WPBakery Page Builder Role Manager settings for your user role.', 'js_composer' ) );
+									print vc_message_warning( esc_html__( 'Your user role have restricted access to content elements. If required, contact your site administrator to change WPBakery Page Builder Role Manager settings for your user role.', 'js_composer' ) );
 									?>
 								</div>
 							</li>

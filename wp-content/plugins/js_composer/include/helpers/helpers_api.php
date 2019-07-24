@@ -788,3 +788,32 @@ function vc_get_shared( $asset = '' ) {
 	return $asset;
 }
 
+/**
+ * Helper function to register new shortcode attribute hook.
+ *
+ * @param $name - attribute name
+ * @param $form_field_callback - hook, will be called when settings form is shown and attribute added to shortcode
+ *     param list
+ * @param $script_url - javascript file url which will be attached at the end of settings form.
+ *
+ * @return bool
+ * @since 4.4
+ */
+function vc_add_shortcode_param( $name, $form_field_callback, $script_url = null ) {
+	return WpbakeryShortcodeParams::addField( $name, $form_field_callback, $script_url );
+}
+
+/**
+ * Call hook for attribute.
+ *
+ * @param $name - attribute name
+ * @param $param_settings - attribute settings from shortcode
+ * @param $param_value - attribute value
+ * @param $tag - attribute tag
+ *
+ * @return mixed|string - returns html which will be render in hook
+ * @since 4.4
+ */
+function vc_do_shortcode_param_settings_field( $name, $param_settings, $param_value, $tag ) {
+	return WpbakeryShortcodeParams::renderSettingsField( $name, $param_settings, $param_value, $tag );
+}

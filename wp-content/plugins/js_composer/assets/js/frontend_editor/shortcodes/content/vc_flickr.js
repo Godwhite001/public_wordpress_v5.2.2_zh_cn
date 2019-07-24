@@ -1,4 +1,5 @@
 (function () {
+	'use strict';
 	window.InlineShortcodeView_vc_flickr = window.InlineShortcodeView.extend( {
 		render: function () {
 			window.InlineShortcodeView_vc_flickr.__super__.render.call( this );

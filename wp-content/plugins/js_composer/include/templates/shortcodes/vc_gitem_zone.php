@@ -29,18 +29,16 @@ $atts = vc_map_get_attributes( $this->getShortcode(), $atts );
 extract( $atts );
 
 if ( 'no' === $render ) {
-	echo '';
-
-	return;
+	return '';
 }
 // Here we check content. If it doesn't contain any useful content, not to render all this staff.
 if ( 'yes' !== $featured_image && empty( $css ) && empty( $el_class ) && empty( $height ) && ! vc_gitem_has_content( $content ) ) {
-	return;
+	return '';
 }
 $css_class = 'vc_gitem-zone' . ( strlen( $this->zone_name ) ? ' vc_gitem-zone-' . $this->zone_name : '' );
 $css_class_mini = 'vc_gitem-zone-mini';
 // Autoheight Mode
-// http://jsfiddle.net/tL2pgtyb/4/ {{
+// https://jsfiddle.net/tL2pgtyb/4/ {{
 // Set css classes for shortcode main html element wrapper and background block
 $css_class .= vc_shortcode_custom_css_class( $css, ' ' ) . ( strlen( $el_class ) ? ' ' . $el_class : '' );
 preg_match( '/background(\-image)?\s*\:\s*[^\s]*?\s*url\(\'?([^\)]+)\'?\)/', $css, $img_matches );
@@ -69,7 +67,7 @@ if ( strlen( $link ) > 0 && 'none' !== $link ) {
 		if ( ! empty( $link_s['rel'] ) ) {
 			$rel = ' rel="' . esc_attr( trim( $link_s['rel'] ) ) . '"';
 		}
-		$image_block = '<a href="' . esc_attr( $link_s['url'] ) . '" title="' . esc_attr( $link_s['title'] ) . '" target="' . esc_attr( trim( $link_s['target'] ) ) . '" class="vc_gitem-link vc-zone-link"' . $rel . '></a>';
+		$image_block = '<a href="' . esc_url( $link_s['url'] ) . '" title="' . esc_attr( $link_s['title'] ) . '" target="' . esc_attr( trim( $link_s['target'] ) ) . '" class="vc_gitem-link vc-zone-link"' . $rel . '></a>';
 	} elseif ( 'post_link' === $link ) {
 		$image_block = '<a href="{{ post_link_url }}" title="{{ post_title }}" class="vc_gitem-link vc-zone-link"></a>';
 	} elseif ( 'post_author' === $link ) {
@@ -84,17 +82,11 @@ if ( strlen( $link ) > 0 && 'none' !== $link ) {
 	}
 	$image_block = apply_filters( 'vc_gitem_zone_image_block_link', $image_block, $link, 'vc_gitem-link vc-zone-link' );
 }
-?>
-<div class="<?php echo esc_attr( $css_class ); ?>"
-	<?php
-	echo( empty( $css_style ) ? '' : ' style="' . esc_attr( $css_style ) . '"' )
-	?>
->
-	<?php
-	// @codingStandardsIgnoreLine
-	echo $image_block . $image;
-	?>
-	<div class="<?php echo esc_attr( $css_class_mini ); ?>"<?php echo( empty( $css_style_mini ) ? '' : ' style="' . esc_attr( $css_style_mini ) . '"' ); ?>>
-		<?php echo do_shortcode( $content ); ?>
-	</div>
-</div>
+$output = '';
+$output .= '<div class="' . esc_attr( $css_class ) . '"';
+$output .= ( empty( $css_style ) ? '' : ' style="' . esc_attr( $css_style ) . '"' );
+$output .= '>';
+$output .= $image_block . $image;
+$output .= '<div class="' . esc_attr( $css_class_mini ) . '"' . ( empty( $css_style_mini ) ? '' : ' style="' . esc_attr( $css_style_mini ) . '"' ) . '>' . do_shortcode( $content ) . '</div></div>';
+
+echo $output;

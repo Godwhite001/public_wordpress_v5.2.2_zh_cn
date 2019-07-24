@@ -154,15 +154,6 @@ class Vc_Base {
 		$this->editForm()->init();
 		$this->templatesPanelEditor()->init();
 		$this->shared_templates->init();
-		// ajax params/shortcode action
-		add_action( 'wp_ajax_wpb_single_image_src', array(
-			$this,
-			'singleImageSrc',
-		) ); // @todo move it
-		add_action( 'wp_ajax_wpb_gallery_html', array(
-			$this,
-			'galleryHTML',
-		) ); // @todo move it
 
 		// plugins list page actions links
 		add_filter( 'plugin_action_links', array(
@@ -260,78 +251,6 @@ class Vc_Base {
 	 */
 	public function removeShortCode( $tag ) {
 		remove_shortcode( $tag );
-	}
-
-	/**
-	 * @todo move it
-	 * @since 4.2
-	 */
-	public function singleImageSrc() {
-		// @todo again, this method should be moved (comment added on 4.8)
-		vc_user_access()->checkAdminNonce()->validateDie()->wpAny( 'edit_posts', 'edit_pages' )->validateDie();
-
-		$image_id = (int) vc_post_param( 'content' );
-		$params = vc_post_param( 'params' );
-		$post_id = vc_post_param( 'post_id' );
-		$img_size = vc_post_param( 'size' );
-		$img = '';
-
-		if ( ! empty( $params['source'] ) ) {
-			$source = $params['source'];
-		} else {
-			$source = 'media_library';
-		}
-
-		switch ( $source ) {
-			case 'media_library':
-			case 'featured_image':
-				if ( 'featured_image' === $source ) {
-					if ( $post_id && has_post_thumbnail( $post_id ) ) {
-						$img_id = get_post_thumbnail_id( $post_id );
-					} else {
-						$img_id = 0;
-					}
-				} else {
-					$img_id = preg_replace( '/[^\d]/', '', $image_id );
-				}
-
-				if ( ! $img_size ) {
-					$img_size = 'thumbnail';
-				}
-
-				if ( $img_id ) {
-					$img = wp_get_attachment_image_src( $img_id, $img_size );
-					if ( $img ) {
-						$img = $img[0];
-					}
-				}
-
-				break;
-
-			case 'external_link':
-				if ( ! empty( $params['custom_src'] ) ) {
-					$img = $params['custom_src'];
-				}
-				break;
-		}
-
-		echo esc_url( $img );
-		die();
-	}
-
-	/**
-	 * @todo move it
-	 * @since 4.2
-	 */
-	public function galleryHTML() {
-		vc_user_access()->checkAdminNonce()->validateDie()->wpAny( 'edit_posts', 'edit_pages' )->validateDie();
-
-		$images = vc_post_param( 'content' );
-		if ( ! empty( $images ) ) {
-			// @codingStandardsIgnoreLine
-			echo vc_field_attached_images( explode( ',', $images ) );
-		}
-		die();
 	}
 
 	/**
@@ -445,7 +364,9 @@ class Vc_Base {
 			$post_custom_css = get_metadata( 'post', $id, '_wpb_post_custom_css', true );
 			if ( ! empty( $post_custom_css ) ) {
 				$post_custom_css = wp_strip_all_tags( $post_custom_css );
-				wp_add_inline_style( 'js_composer_front', $post_custom_css );
+				echo '<style type="text/css" data-type="vc_custom-css">';
+				echo $post_custom_css;
+				echo '</style>';
 			}
 		}
 	}
@@ -481,7 +402,9 @@ class Vc_Base {
 			$shortcodes_custom_css = get_metadata( 'post', $id, '_wpb_shortcodes_custom_css', true );
 			if ( ! empty( $shortcodes_custom_css ) ) {
 				$shortcodes_custom_css = wp_strip_all_tags( $shortcodes_custom_css );
-				wp_add_inline_style( 'js_composer_front', $shortcodes_custom_css );
+				echo '<style type="text/css" data-type="vc_shortcodes-custom-css">';
+				echo $shortcodes_custom_css;
+				echo '</style>';
 			}
 		}
 	}
@@ -495,12 +418,13 @@ class Vc_Base {
 	}
 
 	public function addNoScript() {
-		$tag = 'style';
-		echo '<noscript>';
-		echo '<' . esc_attr( $tag ) . ' type="text/css">';
+		$custom_tag = 'style';
+		$second_tag = 'noscript';
+		echo '<' . esc_attr( $second_tag ) . '>';
+		echo '<' . esc_attr( $custom_tag ) . '>';
 		echo ' .wpb_animate_when_almost_visible { opacity: 1; }';
-		echo '</' . esc_attr( $tag ) . '>';
-		echo '</noscript>';
+		echo '</' . esc_attr( $custom_tag ) . '>';
+		echo '</' . esc_attr( $second_tag ) . '>';
 	}
 
 	/**

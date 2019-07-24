@@ -44,5 +44,5 @@ $output .= $this->getTemplateVariable( 'tabs-list-bottom' );
 $output .= $this->getTemplateVariable( 'tabs-list-right' );
 $output .= '</div>';
 $output .= '</div>';
-// @codingStandardsIgnoreLine
-echo $output;
+
+return $output;

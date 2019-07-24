@@ -1,7 +1,7 @@
 (function ( $ ) {
 	'use strict';
 
-	$( '#vc_vendor_qtranslatex_langs_front' ).change( function () {
+	$( '#vc_vendor_qtranslatex_langs_front' ).on( 'change', function () {
 		vc.closeActivePanel();
 		$( '#vc_logo' ).addClass( 'vc_ui-wp-spinner' );
 		window.location.href = $( this ).val();

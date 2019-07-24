@@ -37,6 +37,6 @@ class WPBakeryShortCode_Vc_Facebook extends WPBakeryShortCode {
 		$class_to_filter .= vc_shortcode_custom_css_class( $css, ' ' ) . $this->getExtraClass( $el_class ) . $this->getCSSAnimation( $css_animation );
 		$css_class = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $class_to_filter, $this->settings['base'], $atts );
 
-		return '<a href="' . $url . '" class="' . esc_attr( $css_class ) . '"></a>';
+		return '<a href="' . esc_url( $url ) . '" class="' . esc_attr( $css_class ) . '"></a>';
 	}
 }

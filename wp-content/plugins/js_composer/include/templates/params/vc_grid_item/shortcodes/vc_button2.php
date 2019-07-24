@@ -32,7 +32,7 @@ if ( isset( $atts['link'] ) ) {
 		if ( strlen( $vc_link['rel'] ) ) {
 			$rel = ' rel="' . esc_attr( $vc_link['rel'] ) . '"';
 		}
-		$link = 'href="' . esc_attr( $vc_link['url'] ) . '" class="' . esc_attr( $css_class ) . '"';
+		$link = 'href="' . esc_url( $vc_link['url'] ) . '" class="' . esc_attr( $css_class ) . '"';
 	} elseif ( 'post_link' === $atts['link'] ) {
 		$link = 'href="{{ post_link_url }}" class="' . esc_attr( $css_class ) . '"';
 	} elseif ( 'image' === $atts['link'] ) {
@@ -47,10 +47,9 @@ $link = apply_filters( 'vc_gitem_post_data_get_link_link', 'a ' . $link, $atts, 
 if ( $align ) {
 	$wrapper_css_class .= ' vc_button-2-align-' . $align;
 }
-?>
-<div class="<?php echo esc_attr( $wrapper_css_class ); ?>">
-	<?php
-	// @codingStandardsIgnoreLine
-	echo '<' . $link . $target . $rel . '>' . $title . '</a>';
-	?>
-</div>
+
+$output = '<div class="' . esc_attr( $wrapper_css_class ) . '">';
+$output .= '<' . $link . $target . $rel . '>' . $title . '</a>';
+$output .= '</div>';
+
+return $output;

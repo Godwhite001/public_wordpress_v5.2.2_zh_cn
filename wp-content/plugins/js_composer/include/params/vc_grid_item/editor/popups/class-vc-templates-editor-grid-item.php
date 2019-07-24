@@ -118,8 +118,7 @@ class Vc_Templates_Editor_Grid_Item extends Vc_Templates_Panel_Editor {
 		}
 		$predefined_template = Vc_Grid_Item::predefinedTemplate( $template_id );
 		if ( $predefined_template ) {
-			// @codingStandardsIgnoreLine
-			echo trim( $predefined_template['template'] );
+			echo esc_html( trim( $predefined_template['template'] ) );
 		}
 	}
 

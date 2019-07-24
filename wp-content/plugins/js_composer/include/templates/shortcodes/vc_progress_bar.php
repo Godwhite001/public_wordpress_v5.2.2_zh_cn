@@ -105,5 +105,4 @@ foreach ( $graph_lines_data as $line ) {
 
 $output .= '</div>';
 
-// @codingStandardsIgnoreLine
-echo $output;
+return $output;

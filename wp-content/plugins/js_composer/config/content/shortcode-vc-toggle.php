@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 require_once vc_path_dir( 'CONFIG_DIR', 'content/vc-custom-heading-element.php' );
-$cta_custom_heading = vc_map_integrate_shortcode( vc_custom_heading_element_params(), 'custom_', __( 'Heading', 'js_composer' ), array(
+$cta_custom_heading = vc_map_integrate_shortcode( vc_custom_heading_element_params(), 'custom_', esc_html__( 'Heading', 'js_composer' ), array(
 	'exclude' => array(
 		'source',
 		'text',
@@ -81,7 +81,7 @@ $params = array_merge( array(
 		'type' => 'el_id',
 		'heading' => esc_html__( 'Element ID', 'js_composer' ),
 		'param_name' => 'el_id',
-		'description' => sprintf( esc_html__( 'Enter element ID (Note: make sure it is unique and valid according to %sw3c specification%s).', 'js_composer' ), '<a href="http://www.w3schools.com/tags/att_global_id.asp" target="_blank">', '</a>' ),
+		'description' => sprintf( esc_html__( 'Enter element ID (Note: make sure it is unique and valid according to %sw3c specification%s).', 'js_composer' ), '<a href="https://www.w3schools.com/tags/att_global_id.asp" target="_blank">', '</a>' ),
 	),
 	array(
 		'type' => 'textfield',

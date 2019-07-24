@@ -6,9 +6,10 @@ $saveAsTemplateElements = apply_filters( 'vc_popup_save_as_template_elements', a
 	'vc_row',
 	'vc_section',
 ) );
+$custom_tag = 'script'; // TODO: Remove this file after 6.2 when BC is completed
 ?>
 <div class="vc_ui-list-bar-group">
-	<?php if ( in_array( $shortcode_name, $saveAsTemplateElements, true ) && vc_user_access()->part( 'templates' )->checkStateAny( true, null )->get() ) : ?>
+	<?php if ( in_array( $shortcode_name, $saveAsTemplateElements ) && vc_user_access()->part( 'templates' )->checkStateAny( true, null )->get() ) : ?>
 		<ul class="vc_ui-list-bar">
 			<li class="vc_ui-list-bar-item">
 				<button type="button" class="vc_ui-list-bar-item-trigger" data-vc-save-template>
@@ -17,7 +18,7 @@ $saveAsTemplateElements = apply_filters( 'vc_popup_save_as_template_elements', a
 			</li>
 		</ul>
 	<?php endif; ?>
-	<?php if ( ! in_array( $shortcode_name, $saveAsTemplateElements, true ) && vc_user_access()->part( 'presets' )->checkStateAny( true, null )->get() ) : ?>
+	<?php if ( ! in_array( $shortcode_name, $saveAsTemplateElements ) && vc_user_access()->part( 'presets' )->checkStateAny( true, null )->get() ) : ?>
 		<ul class="vc_ui-list-bar">
 			<li class="vc_ui-list-bar-item">
 				<button type="button" class="vc_ui-list-bar-item-trigger" data-vc-save-settings-preset>
@@ -26,7 +27,7 @@ $saveAsTemplateElements = apply_filters( 'vc_popup_save_as_template_elements', a
 			</li>
 		</ul>
 	<?php endif; ?>
-	<script>
+	<<?php echo esc_attr( $custom_tag ); ?>>
 		window.vc_presets_data = {
 			"presets": <?php echo wp_json_encode( $list_presets ); ?>,
 			"presetsCount": <?php echo count( $list_presets[0] ) + count( $list_presets[1] ); ?>,
@@ -34,5 +35,5 @@ $saveAsTemplateElements = apply_filters( 'vc_popup_save_as_template_elements', a
 			"can": <?php echo (int) vc_user_access()->part( 'presets' )->can()->get(); ?>,
 			"defaultTitle": "<?php esc_attr_e( 'Untitled', 'js_composer' ); ?>"
 		}
-	</script>
+	</<?php echo esc_attr( $custom_tag ); ?>>
 </div>

@@ -35,5 +35,5 @@ $output = '
 		</div>
 	</div>
 ';
-// @codingStandardsIgnoreLine
-echo $output;
+
+return $output;

@@ -31,6 +31,5 @@ $vc_text_separator = visual_composer()->getShortCode( 'vc_text_separator' );
 $atts['el_class'] = $css_class;
 $atts['layout'] = 'separator_no_text';
 if ( is_object( $vc_text_separator ) ) {
-	// @codingStandardsIgnoreLine
-	echo $vc_text_separator->render( $atts );
+	return $vc_text_separator->render( $atts );
 }

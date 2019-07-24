@@ -27,11 +27,10 @@ if ( ! empty( $animation ) ) {
 } elseif ( 'vc_gitem_preview' !== vc_request_param( 'action' ) && vc_verify_admin_nonce() && ( current_user_can( 'edit_posts' ) || current_user_can( 'edit_pages' ) ) ) {
 	$content = preg_replace( '/(?<=\[)(vc_gitem_zone_b\b)/', '$1 render="no"', $content );
 }
-?>
-<div class="<?php echo esc_attr( $css_class ); ?>"
-	<?php
-	// @codingStandardsIgnoreLine
-	echo $animation_attr;
-	echo empty( $css_style ) ? '' : ' style="' . esc_attr( $css_style ) . '"';
-	?>
-><?php echo do_shortcode( $content ); ?></div>
+
+$output = '';
+$output .= '<div class="' . esc_attr( $css_class ) . '" ' . $animation_attr . ( empty( $css_style ) ? '' : ' style="' . esc_attr( $css_style ) ) . '">';
+$output .= do_shortcode( $content );
+$output .= '</div>';
+
+echo $output;

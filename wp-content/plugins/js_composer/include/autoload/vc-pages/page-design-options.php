@@ -36,22 +36,21 @@ function vc_custom_css_admin_notice() {
 	$message_important = esc_html__( 'Important notice', 'js_composer' );
 	if ( is_object( $current_screen ) && isset( $current_screen->id ) && 'visual-composer_page_vc-color' === $current_screen->id ) {
 		$message = esc_html__( 'You have an outdated version of WPBakery Page Builder Design Options. It is required to review and save it.', 'js_composer' );
-		$html = '<p><strong>' . esc_html( $message_important ) . '</strong>: ' . esc_html( $message ) . '</p>';
+		echo '<div class="' . esc_attr( $class ) . '"><p><strong>' . esc_html( $message_important ) . '</strong>: ' . esc_html( $message ) . '</p></div>';
 	} else {
 		$message = esc_html__( 'You have an outdated version of WPBakery Page Builder Design Options. It is required to review and save it.', 'js_composer' );
 		$btnClass = 'button button-primary button-large vc_button-settings-less';
-		$btnAtts = array(
+		echo '<div class="' . esc_attr( $class ) . '"><p><strong>' . esc_html( $message_important ) . '</strong>: ' . esc_html( $message ) . '</p>' . '<p>';
+		echo '<a ' . implode( ' ', array(
 			'href="' . esc_url( admin_url( 'admin.php?page=vc-color' ) ) . '"',
 			'class="' . esc_attr( $btnClass ) . '"',
 			'id="vc_less-save-button"',
 			'style="vertical-align: baseline;"',
 			// needed to fix ":active bug"
-		);
-		$html = '<p><strong>' . esc_html( $message_important ) . '</strong>: ' . esc_html( $message ) . '</p>' . '<p><a ' . implode( ' ', $btnAtts ) . '>' . esc_html__( 'Open Design Options', 'js_composer' ) . '</a></p>';
+		) ) . '>';
+		echo esc_html__( 'Open Design Options', 'js_composer' ) . '</a>';
+		echo '</p></div>';
 	}
-
-	// @codingStandardsIgnoreLine
-	echo sprintf( '<div class="%s">%s</div>', esc_attr( $class ), $html );
 }
 
 /**

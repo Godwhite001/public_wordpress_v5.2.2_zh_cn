@@ -143,7 +143,8 @@ class Vc_ParamGroup {
 		$add_template = vc_include_template( 'params/param_group/add.tpl.php' );
 		$add_template = str_replace( '%content%', $content, $add_template );
 
-		$output .= '<script type="text/html" class="vc_param_group-template">' . wp_json_encode( $add_template ) . '</script>';
+		$custom_tag = 'script';
+		$output .= '<' . $custom_tag . ' type="text/html" class="vc_param_group-template">' . wp_json_encode( $add_template ) . '</' . $custom_tag . '>';
 		$output .= '<input name="' . $this->settings['param_name'] . '" class="wpb_vc_param_value  ' . $this->settings['param_name'] . ' ' . $this->settings['type'] . '_field" type="hidden" value="' . $this->unparsed_value . '" />';
 
 		return $output;
@@ -181,9 +182,7 @@ function vc_param_group_clone() {
 	$param = vc_post_param( 'param' );
 	$value = vc_post_param( 'value' );
 	$tag = vc_post_param( 'shortcode' );
-	// @codingStandardsIgnoreLine
-	echo vc_param_group_clone_by_data( $tag, wp_json_encode( urldecode( $param ), true ), wp_json_encode( rawurlencode( $value ), true ) );
-	die;
+	wp_send_json_success( vc_param_group_clone_by_data( $tag, json_decode( rawurldecode( $param ), true ), json_decode( rawurldecode( $value ), true ) ) );
 }
 
 /**
@@ -195,7 +194,6 @@ function vc_param_group_clone() {
  * @since 4.4
  */
 function vc_param_group_clone_by_data( $tag, $params, $data ) {
-
 	$output = '';
 	$params['base'] = $tag;
 	$edit_form = new Vc_ParamGroup_Edit_Form_Fields( $params );

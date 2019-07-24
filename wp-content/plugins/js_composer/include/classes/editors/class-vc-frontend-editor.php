@@ -90,6 +90,10 @@ class Vc_Frontend_Editor {
 	 */
 	protected static $brand_url = 'https://wpbakery.com/?utm_campaign=VCplugin&utm_source=vc_user&utm_medium=frontend_editor';
 	public $post_custom_css;
+	/**
+	 * @var string
+	 */
+	protected $vc_post_content = '';
 
 	/**
 	 *
@@ -236,18 +240,20 @@ class Vc_Frontend_Editor {
 
 		$post_id = (int) vc_get_param( 'vc_post_id' );
 		if ( $post_id > 0 && $post->ID === $post_id && ! defined( 'VC_LOADING_EDITABLE_CONTENT' ) ) {
+			$post_content = '';
 			define( 'VC_LOADING_EDITABLE_CONTENT', true );
 			remove_filter( 'the_content', 'wpautop' );
 			do_action( 'vc_load_shortcode' );
+			$post_content .= $this->getPageShortcodesByContent( $post->post_content );
 			ob_start();
-			$this->getPageShortcodesByContent( $post->post_content );
 			vc_include_template( 'editors/partials/vc_welcome_block.tpl.php' );
-			$post_content = ob_get_clean();
+			$post_content .= ob_get_clean();
 
 			ob_start();
 			vc_include_template( 'editors/partials/post_shortcodes.tpl.php', array( 'editor' => $this ) );
 			$post_shortcodes = ob_get_clean();
-			$GLOBALS['vc_post_content'] = '<script type="template/html" id="vc_template-post-content" style="display:none">' . rawurlencode( apply_filters( 'the_content', $post_content ) ) . '</script>' . $post_shortcodes;
+			$custom_tag = 'script';
+			$this->vc_post_content = '<' . $custom_tag . ' type="template/html" id="vc_template-post-content" style="display:none">' . rawurlencode( apply_filters( 'the_content', $post_content ) ) . '</' . $custom_tag . '>' . $post_shortcodes;
 			// We already used the_content filter, we need to remove it to avoid double-using
 			remove_all_filters( 'the_content' );
 			// Used for just returning $post->post_content
@@ -264,7 +270,7 @@ class Vc_Frontend_Editor {
 	 */
 	public function printPostShortcodes() {
 		// @codingStandardsIgnoreLine
-		echo isset( $GLOBALS['vc_post_content'] ) ? $GLOBALS['vc_post_content'] : '';
+		print $this->vc_post_content;
 	}
 
 	/**
@@ -491,7 +497,7 @@ class Vc_Frontend_Editor {
 	 */
 	public function renderEditButton( $link ) {
 		if ( $this->showButton( get_the_ID() ) ) {
-			return $link . ' <a href="' . self::getInlineUrl() . '" id="vc_load-inline-editor" class="vc_inline-link">' . esc_html__( 'Edit with WPBakery Page Builder', 'js_composer' ) . '</a>';
+			return $link . ' <a href="' . esc_url( self::getInlineUrl() ) . '" id="vc_load-inline-editor" class="vc_inline-link">' . esc_html__( 'Edit with WPBakery Page Builder', 'js_composer' ) . '</a>';
 		}
 
 		return $link;
@@ -507,7 +513,7 @@ class Vc_Frontend_Editor {
 		$post = get_post();
 		if ( $this->showButton( $post->ID ) ) {
 			$actions['edit_vc'] = '<a
-		href="' . $this->getInlineUrl( '', $post->ID ) . '">' . esc_html__( 'Edit with WPBakery Page Builder', 'js_composer' ) . '</a>';
+		href="' . esc_url( $this->getInlineUrl( '', $post->ID ) ) . '">' . esc_html__( 'Edit with WPBakery Page Builder', 'js_composer' ) . '</a>';
 		}
 
 		return $actions;
@@ -627,20 +633,23 @@ class Vc_Frontend_Editor {
 		if ( vc_is_page_editable() && vc_enabled_frontend() ) {
 			$action = vc_post_param( 'action' );
 			if ( 'vc_load_shortcode' === $action ) {
+				$output = '';
 				! defined( 'CONCATENATE_SCRIPTS' ) && define( 'CONCATENATE_SCRIPTS', false );
 				ob_start();
 				$this->setPost();
 				$shortcodes = (array) vc_post_param( 'shortcodes' );
 				do_action( 'vc_load_shortcode', $shortcodes );
-				$this->renderShortcodes( $shortcodes );
-				echo '<div data-type="files">';
+				$output .= ob_get_clean();
+				$output .= $this->renderShortcodes( $shortcodes );
+				$output .= '<div data-type="files">';
+				ob_start();
 				_print_styles();
 				print_head_scripts();
 				wp_footer();
-				echo '</div>';
-				$output = ob_get_clean();
+				$output .= ob_get_clean();
+				$output .= '</div>';
 				// @codingStandardsIgnoreLine
-				echo apply_filters( 'vc_frontend_editor_load_shortcode_ajax_output', $output );
+				print apply_filters( 'vc_frontend_editor_load_shortcode_ajax_output', $output );
 			} elseif ( 'vc_frontend_load_template' === $action ) {
 				$this->setPost();
 				visual_composer()->templatesPanelEditor()->renderFrontendTemplate();
@@ -686,6 +695,7 @@ class Vc_Frontend_Editor {
 	 * @param array $shortcodes
 	 *
 	 * vc_filter: vc_front_render_shortcodes - hook to override shortcode rendered output
+	 * @return mixed|void
 	 * @throws \Exception
 	 */
 	public function renderShortcodes( array $shortcodes ) {
@@ -709,8 +719,7 @@ class Vc_Frontend_Editor {
 			}
 		}
 
-		// @codingStandardsIgnoreLine
-		echo apply_filters( 'vc_front_render_shortcodes', $output );
+		return apply_filters( 'vc_front_render_shortcodes', $output );
 	}
 
 	/**
@@ -748,10 +757,7 @@ class Vc_Frontend_Editor {
 		wp_register_script( 'webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js', array(), WPB_VC_VERSION, true ); // Google Web Font CDN
 		wp_register_script( 'wpb_scrollTo_js', vc_asset_url( 'lib/bower/scrollTo/jquery.scrollTo.min.js' ), array( 'jquery' ), WPB_VC_VERSION, true );
 		wp_register_script( 'vc_accordion_script', vc_asset_url( 'lib/vc_accordion/vc-accordion.min.js' ), array( 'jquery' ), WPB_VC_VERSION, true );
-		if (defined('JS_COMPOSER_THEME_ACTIVATED_URL'))
-			wp_register_script( 'vc-frontend-editor-min-js', vc_asset_url( 'js/dist/compat/frontend-editor.min.js' ), array(), WPB_VC_VERSION, true );
-		else
-			wp_register_script( 'vc-frontend-editor-min-js', vc_asset_url( 'js/dist/frontend-editor.min.js' ), array(), WPB_VC_VERSION, true );
+		wp_register_script( 'vc-frontend-editor-min-js', vc_asset_url( 'js/dist/frontend-editor.min.js' ), array(), WPB_VC_VERSION, true );
 		wp_localize_script( 'vc-frontend-editor-min-js', 'i18nLocale', visual_composer()->getEditorsLocale() );
 	}
 
@@ -903,6 +909,7 @@ class Vc_Frontend_Editor {
 	/**
 	 * @param $content
 	 *
+	 * @return string|void
 	 * @throws \Exception
 	 * @since 4.4
 	 */
@@ -923,8 +930,7 @@ class Vc_Frontend_Editor {
 			}
 		}
 
-		// @codingStandardsIgnoreLine
-		echo $this->parseShortcodesString( $content );
+		return $this->parseShortcodesString( $content );
 	}
 
 	/**
@@ -1000,4 +1006,3 @@ if ( ! function_exists( 'vc_container_anchor' ) ) {
 		return '<span class="vc_container-anchor" style="display: none;"></span>';
 	}
 }
-

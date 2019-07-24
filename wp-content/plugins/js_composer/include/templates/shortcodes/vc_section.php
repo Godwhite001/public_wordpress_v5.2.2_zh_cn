@@ -131,5 +131,4 @@ $output .= wpb_js_remove_wpautop( $content );
 $output .= '</section>';
 $output .= $after_output;
 
-// @codingStandardsIgnoreLine
-echo $output;
+return $output;

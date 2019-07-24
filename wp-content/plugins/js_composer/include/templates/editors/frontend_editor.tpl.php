@@ -19,16 +19,16 @@ wp_enqueue_media( array( 'post' => $editor->post_id ) );
 require_once $editor->adminFile( 'admin-header.php' );
 // @since 4.8 js logic for user role access manager.
 vc_include_template( 'editors/partials/access-manager-js.tpl.php' );
-
+$custom_tag = 'script';
 ?>
 	<div id="vc_preloader"></div>
 	<div id="vc_overlay_spinner" class="vc_ui-wp-spinner vc_ui-wp-spinner-dark vc_ui-wp-spinner-lg" style="display:none;"></div>
-	<script type="text/javascript">
+	<<?php echo esc_attr( $custom_tag ); ?>>
 		document.getElementById( 'vc_preloader' ).style.height = window.screen.availHeight;
-		var vc_mode = '<?php echo esc_js( vc_mode() ); ?>',
-			vc_iframe_src = '<?php echo esc_js( $editor->url ); ?>';
+		window.vc_mode = '<?php echo esc_js( vc_mode() ); ?>';
+		window.vc_iframe_src = '<?php echo esc_js( $editor->url ); ?>';
 		window.wpbGutenbergEditorUrl = '<?php echo esc_js( set_url_scheme( admin_url( 'post-new.php?post_type=wpb_gutenberg_param' ) ) ); ?>';
-	</script>
+	</<?php echo esc_attr( $custom_tag ); ?>>
 	<input type="hidden" name="vc_post_title" id="vc_title-saved" value="<?php echo esc_attr( $post_title ); ?>"/>
 	<input type="hidden" name="vc_post_id" id="vc_post-id" value="<?php echo esc_attr( $editor->post_id ); ?>"/>
 <?php
@@ -91,27 +91,15 @@ if ( vc_user_access()->part( 'presets' )->can()->get() ) {
 
 ?>
 	<input type="hidden" name="vc_post_custom_css" id="vc_post-custom-css" value="<?php echo esc_attr( $editor->post_custom_css ); ?>" autocomplete="off"/>
-	<script type="text/javascript">
-        var vc_user_mapper = {};
-		<?php
-		foreach ( WPBMap::getUserShortCodes() as $tag => $settings ) {
-			printf( "\tvc_user_mapper['%s'] = %s;\n", $tag, json_encode( $settings ) );
-		}
-		?>
-
-        var vc_mapper = {};
-		<?php
-		foreach ( WPBMap::getShortCodes() as $tag => $settings ) {
-			printf( "\tvc_mapper['%s'] = %s;\n", $tag, json_encode( $settings ) );
-		}
-		?>
-
-        var vc_vendor_settings_presets = <?php echo json_encode( $vc_vendor_settings_presets ) ?>,
-			vc_all_presets = <?php echo wp_json_encode( $vc_all_presets ); ?>,
-			vc_roles = [], // @todo fix_roles BC for roles
-			vcAdminNonce = '<?php echo esc_js( vc_generate_nonce( 'vc-admin-nonce' ) ); ?>',
-			vc_post_id = <?php echo esc_js( $post_ID ); ?>;
-	</script>
+	<<?php echo esc_attr( $custom_tag ); ?>>
+		window.vc_user_mapper = <?php echo wp_json_encode( WPBMap::getUserShortCodes() ); ?>;
+		window.vc_mapper = <?php echo wp_json_encode( WPBMap::getShortCodes() ); ?>;
+		window.vc_vendor_settings_presets = <?php echo wp_json_encode( $vc_vendor_settings_presets ); ?>;
+		window.vc_all_presets = <?php echo wp_json_encode( $vc_all_presets ); ?>;
+		window.vc_roles = [];
+		window.vcAdminNonce = '<?php echo esc_js( vc_generate_nonce( 'vc-admin-nonce' ) ); ?>';
+		window.vc_post_id = <?php echo esc_js( $post_ID ); ?>;
+	</<?php echo esc_attr( $custom_tag ); ?>>
 
 <?php vc_include_template( 'editors/partials/vc_settings-image-block.tpl.php' ); ?>
 <!-- BC for older plugins 5.5 !-->

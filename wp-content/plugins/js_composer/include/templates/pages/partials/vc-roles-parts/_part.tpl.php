@@ -92,7 +92,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 									<td title="<?php echo esc_attr( $cap['base'] ); ?>">
 										<?php
 										// @codingStandardsIgnoreLine
-										echo $add_box->renderIcon( $cap );
+										print $add_box->renderIcon( $cap );
 										?>
 										<div>
 											<?php echo esc_html( $cap['name'] ); ?>

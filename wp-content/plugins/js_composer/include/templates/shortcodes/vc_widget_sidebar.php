@@ -46,5 +46,5 @@ $output = '<div ' . implode( ' ', $wrapper_attributes ) . ' class="' . esc_attr(
 		</div>
 	</div>
 ';
-// @codingStandardsIgnoreLine
-echo $output;
+
+return $output;

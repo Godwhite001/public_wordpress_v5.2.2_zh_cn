@@ -77,7 +77,7 @@ function vc_gitem_create_link( $atts, $default_class = '', $title = '' ) {
 			if ( strlen( $link['title'] ) ) {
 				$title = $link['title'];
 			}
-			$link = 'a href="' . esc_attr( $link['url'] ) . '" class="' . esc_attr( $css_class ) . '"';
+			$link = 'a href="' . esc_url( $link['url'] ) . '" class="' . esc_attr( $css_class ) . '"';
 		} elseif ( 'post_link' === $atts['link'] ) {
 			$link = 'a href="{{ post_link_url }}" class="' . esc_attr( $css_class ) . '"';
 			if ( ! strlen( $title ) ) {
@@ -131,9 +131,9 @@ function vc_gitem_create_link_real( $atts, $post, $default_class = '', $title = 
 			if ( strlen( $link['title'] ) ) {
 				$title = $link['title'];
 			}
-			$link = 'a href="' . esc_attr( $link['url'] ) . '" class="' . esc_attr( $link_css_class ) . '"';
+			$link = 'a href="' . esc_url( $link['url'] ) . '" class="' . esc_attr( $link_css_class ) . '"';
 		} elseif ( 'post_link' === $atts['link'] ) {
-			$link = 'a href="' . get_permalink( $post->ID ) . '" class="' . esc_attr( $link_css_class ) . '"';
+			$link = 'a href="' . esc_url( get_permalink( $post->ID ) ) . '" class="' . esc_attr( $link_css_class ) . '"';
 			if ( ! strlen( $title ) ) {
 				$title = the_title( '', '', false );
 			}
@@ -142,7 +142,7 @@ function vc_gitem_create_link_real( $atts, $post, $default_class = '', $title = 
 				'post' => $post,
 				'data' => '',
 			) );
-			$link = 'a href="' . $href_link . '" class="' . esc_attr( $link_css_class ) . '"';
+			$link = 'a href="' . esc_url( $href_link ) . '" class="' . esc_attr( $link_css_class ) . '"';
 		} elseif ( 'image_lightbox' === $atts['link'] ) {
 			$link = 'a' . vc_gitem_template_attribute_post_image_url_attr_prettyphoto( '', array(
 				'post' => $post,

@@ -252,7 +252,7 @@ class Vc_Vendor_Woocommerce {
 						'std' => 'date',
 						// default WC value for recent_products
 						'save_always' => true,
-						'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+						'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 					),
 					array(
 						'type' => 'dropdown',
@@ -262,7 +262,7 @@ class Vc_Vendor_Woocommerce {
 						'std' => 'DESC',
 						// default WC value
 						'save_always' => true,
-						'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+						'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 					),
 				),
 			);
@@ -307,7 +307,7 @@ class Vc_Vendor_Woocommerce {
 						'std' => 'date',
 						// default WC value
 						'save_always' => true,
-						'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+						'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 					),
 					array(
 						'type' => 'dropdown',
@@ -317,7 +317,7 @@ class Vc_Vendor_Woocommerce {
 						'std' => 'DESC',
 						// default WC value
 						'save_always' => true,
-						'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+						'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="s://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 					),
 				),
 			);
@@ -375,7 +375,7 @@ class Vc_Vendor_Woocommerce {
 							'std' => 'title',
 							// Default WC value
 							'save_always' => true,
-							'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s. Default by Title', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+							'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s. Default by Title', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 						),
 						array(
 							'type' => 'dropdown',
@@ -385,7 +385,7 @@ class Vc_Vendor_Woocommerce {
 							'std' => 'ASC',
 							// default WC value
 							'save_always' => true,
-							'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s. Default by ASC', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+							'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s. Default by ASC', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 						),
 						array(
 							'type' => 'autocomplete',
@@ -444,7 +444,7 @@ class Vc_Vendor_Woocommerce {
 			case 'add_to_cart_url':
 				/**
 				 * @shortcode add_to_cart_url
-				 * @description Echo the URL on the add to cart button of a single product by ID.
+				 * @description Print the URL on the add to cart button of a single product by ID.
 				 *
 				 * @param id integer
 				 * @param sku string
@@ -542,7 +542,7 @@ class Vc_Vendor_Woocommerce {
 							'std' => 'menu_order title',
 							// Default WC value
 							'save_always' => true,
-							'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+							'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="s://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 						),
 						array(
 							'type' => 'dropdown',
@@ -552,7 +552,7 @@ class Vc_Vendor_Woocommerce {
 							'std' => 'ASC',
 							// default WC value
 							'save_always' => true,
-							'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+							'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 						),
 						array(
 							'type' => 'dropdown',
@@ -587,7 +587,7 @@ class Vc_Vendor_Woocommerce {
 							'std' => 'name',
 							// default WC value
 							'save_always' => true,
-							'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+							'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 						),
 						array(
 							'type' => 'dropdown',
@@ -597,7 +597,7 @@ class Vc_Vendor_Woocommerce {
 							'std' => 'ASC',
 							// default WC value
 							'save_always' => true,
-							'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+							'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 						),
 						array(
 							'type' => 'textfield',
@@ -667,7 +667,7 @@ class Vc_Vendor_Woocommerce {
 						'std' => 'title',
 						// default WC value
 						'save_always' => true,
-						'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+						'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 					),
 					array(
 						'type' => 'dropdown',
@@ -677,7 +677,7 @@ class Vc_Vendor_Woocommerce {
 						'std' => 'ASC',
 						// default WC value
 						'save_always' => true,
-						'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+						'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 					),
 				),
 			);
@@ -755,7 +755,7 @@ class Vc_Vendor_Woocommerce {
 						'std' => 'title',
 						// default WC value
 						'save_always' => true,
-						'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+						'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 					),
 					array(
 						'type' => 'dropdown',
@@ -765,7 +765,7 @@ class Vc_Vendor_Woocommerce {
 						'std' => 'ASC',
 						// Default WP Value
 						'save_always' => true,
-						'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+						'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 					),
 				),
 			);
@@ -817,7 +817,7 @@ class Vc_Vendor_Woocommerce {
 							'std' => 'title',
 							// default WC value
 							'save_always' => true,
-							'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+							'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 						),
 						array(
 							'type' => 'dropdown',
@@ -827,7 +827,7 @@ class Vc_Vendor_Woocommerce {
 							'std' => 'ASC',
 							// Default WC value
 							'save_always' => true,
-							'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+							'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 						),
 						array(
 							'type' => 'dropdown',
@@ -912,7 +912,7 @@ class Vc_Vendor_Woocommerce {
 							'std' => 'rand',
 							// default WC value
 							'save_always' => true,
-							'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+							'description' => sprintf( esc_html__( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 						),
 						array(
 							'type' => 'dropdown',
@@ -922,7 +922,7 @@ class Vc_Vendor_Woocommerce {
 							'std' => 'DESC',
 							// Default WC value
 							'save_always' => true,
-							'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
+							'description' => sprintf( esc_html__( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
 						),
 					),
 				);

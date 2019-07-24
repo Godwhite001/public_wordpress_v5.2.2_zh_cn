@@ -28,8 +28,17 @@ wp_enqueue_script( 'vc_editors-templates-preview-js' );
 wp_enqueue_media( array( 'post' => $post_ID ) );
 visual_composer()->templatesPanelEditor()->registerPreviewScripts();
 require_once ABSPATH . 'wp-admin/admin-header.php';
+$custom_tag = 'script';
+$first_tag = 'style';
 ?>
-<style type="text/css">
+<<?php echo esc_attr( $custom_tag ); ?>>
+	window.vc_user_mapper = <?php echo wp_json_encode( WPBMap::getUserShortCodes() ); ?>;
+	window.vc_mapper = <?php echo wp_json_encode( WPBMap::getShortCodes() ); ?>;
+	window.vc_roles = [];
+	window.vcAdminNonce = '<?php echo esc_js( vc_generate_nonce( 'vc-admin-nonce' ) ); ?>';
+	window.vc_post_id = <?php echo esc_js( $post_ID ); ?>;
+</<?php echo esc_attr( $custom_tag ); ?>>
+<<?php echo esc_attr( $first_tag ); ?>>
 	#screen-meta, #adminmenumain, .notice, #wpfooter, #message, .updated {
 		display: none !important;
 	}
@@ -48,13 +57,13 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 		overflow: hidden;
 		background: transparent;
 	}
-</style>
+</<?php echo esc_attr( $first_tag ); ?>>
 <div class="vc_not-remove-overlay"></div>
 <div class="vc_ui-template-preview">
 	<textarea id="content" style="display: none;">
 		<?php
 		// @codingStandardsIgnoreLine
-		echo $content;
+		print $content;
 		?>
 	</textarea>
 

@@ -12,7 +12,7 @@ $layouts = array(
 	'md' => 'landscape-tablets',
 	'lg' => 'default',
 );
-
+$custom_tag = 'script';
 ?>
 <div class="vc_column-offset" data-column-offset="true">
 	<?php if ( '1' === vc_settings()->get( 'not_responsive_css' ) ) : ?>
@@ -50,13 +50,13 @@ $layouts = array(
 				<td>
 					<?php
 					// @codingStandardsIgnoreLine
-					echo $param->offsetControl( $key );
+					print $param->offsetControl( $key );
 					?>
 				</td>
 				<td>
 					<?php
 					// @codingStandardsIgnoreLine
-					echo $param->sizeControl( $key );
+					print $param->sizeControl( $key );
 					?>
 				</td>
 				<td>
@@ -70,7 +70,7 @@ $layouts = array(
 		<?php endforeach ?>
 	</table>
 </div>
-<script type="text/javascript">
+<<?php echo esc_attr( $custom_tag ); ?>>
 	window.VcI8nColumnOffsetParam =
 	<?php
 	echo wp_json_encode( array(
@@ -79,4 +79,4 @@ $layouts = array(
 	) )
 	?>
 	;
-</script>
+</<?php echo esc_attr( $custom_tag ); ?>>

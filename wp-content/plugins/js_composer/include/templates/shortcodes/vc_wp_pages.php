@@ -35,6 +35,6 @@ if ( is_object( $wp_widget_factory ) && isset( $wp_widget_factory->widgets, $wp_
 	$output .= ob_get_clean();
 
 	$output .= '</div>';
-	// @codingStandardsIgnoreLine
-	echo $output;
+
+	return $output;
 }

@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '-1' );
+}
 
 class vcImageFilter {
 
@@ -43,9 +46,21 @@ class vcImageFilter {
 
 	public function sharpen() {
 		$gaussian = array(
-			array( 1.0, 1.0, 1.0 ),
-			array( 1.0, - 7.0, 1.0 ),
-			array( 1.0, 1.0, 1.0 )
+			array(
+				1.0,
+				1.0,
+				1.0,
+			),
+			array(
+				1.0,
+				- 7.0,
+				1.0,
+			),
+			array(
+				1.0,
+				1.0,
+				1.0,
+			),
 		);
 		imageconvolution( $this->image, $gaussian, 1, 4 );
 
@@ -54,9 +69,21 @@ class vcImageFilter {
 
 	public function emboss() {
 		$gaussian = array(
-			array( - 2.0, - 1.0, 0.0 ),
-			array( - 1.0, 1.0, 1.0 ),
-			array( 0.0, 1.0, 2.0 )
+			array(
+				- 2.0,
+				- 1.0,
+				0.0,
+			),
+			array(
+				- 1.0,
+				1.0,
+				1.0,
+			),
+			array(
+				0.0,
+				1.0,
+				2.0,
+			),
 		);
 
 		imageconvolution( $this->image, $gaussian, 1, 5 );
@@ -86,9 +113,21 @@ class vcImageFilter {
 
 	public function fuzzy() {
 		$gaussian = array(
-			array( 1.0, 1.0, 1.0 ),
-			array( 1.0, 1.0, 1.0 ),
-			array( 1.0, 1.0, 1.0 )
+			array(
+				1.0,
+				1.0,
+				1.0,
+			),
+			array(
+				1.0,
+				1.0,
+				1.0,
+			),
+			array(
+				1.0,
+				1.0,
+				1.0,
+			),
 		);
 
 		imageconvolution( $this->image, $gaussian, 9, 20 );
@@ -280,5 +319,4 @@ class vcImageFilter {
 
 		return $this;
 	}
-
 }

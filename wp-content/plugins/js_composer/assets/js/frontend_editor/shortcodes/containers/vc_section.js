@@ -1,4 +1,5 @@
 (function () {
+	'use strict';
 	window.InlineShortcodeView_vc_section = window.InlineShortcodeViewContainer.extend( {
 		controls_selector: '#vc_controls-template-container',
 		initialize: function () {

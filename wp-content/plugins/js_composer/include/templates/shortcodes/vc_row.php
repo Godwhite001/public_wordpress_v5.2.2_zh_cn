@@ -157,5 +157,4 @@ $output .= wpb_js_remove_wpautop( $content );
 $output .= '</div>';
 $output .= $after_output;
 
-// @codingStandardsIgnoreLine
 echo $output;

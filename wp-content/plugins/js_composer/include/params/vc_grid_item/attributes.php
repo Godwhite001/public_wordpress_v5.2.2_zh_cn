@@ -149,7 +149,7 @@ function vc_gitem_template_attribute_post_image_url( $value, $data ) {
 function vc_gitem_template_attribute_post_image_url_href( $value, $data ) {
 	$link = vc_gitem_template_attribute_post_image_url( $value, $data );
 
-	return strlen( $link ) ? ' href="' . esc_attr( $link ) . '"' : '';
+	return strlen( $link ) ? ' href="' . esc_url( $link ) . '"' : '';
 }
 
 /**

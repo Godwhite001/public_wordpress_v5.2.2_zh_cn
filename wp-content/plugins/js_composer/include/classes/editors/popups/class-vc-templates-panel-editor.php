@@ -188,30 +188,14 @@ class Vc_Templates_Panel_Editor {
 		$template_name = esc_html( $template_name );
 		$preview_template_title = esc_attr__( 'Preview template', 'js_composer' );
 		$add_template_title = esc_attr__( 'Add template', 'js_composer' );
-		$deleteControlRender = '';
+		echo '<button type="button" class="vc_ui-list-bar-item-trigger" title="' . esc_attr( $add_template_title ) . '" data-template-handler="" data-vc-ui-element="template-title">' . esc_html( $template_name ) . '</button><div class="vc_ui-list-bar-item-actions"><button type="button" class="vc_general vc_ui-control-button" title="' . esc_attr( $add_template_title ) . '" data-template-handler=""><i class="vc-composer-icon vc-c-icon-add"></i></button>';
+
 		if ( vc_user_access()->part( 'templates' )->checkStateAny( true, null )->get() ) {
 			$delete_template_title = esc_attr__( 'Delete template', 'js_composer' );
-			$deleteControlRender = sprintf( '<button type="button" class="vc_general vc_ui-control-button" data-vc-ui-delete="template-title" title="%s">
-					<i class="vc-composer-icon vc-c-icon-delete_empty"></i>
-				</button>', esc_attr( $delete_template_title ) );
+			echo '<button type="button" class="vc_general vc_ui-control-button" data-vc-ui-delete="template-title" title="' . esc_attr( $delete_template_title ) . '"><i class="vc-composer-icon vc-c-icon-delete_empty"></i></button>';
 		}
-		// @codingStandardsIgnoreStart
-		echo sprintf( '<button type="button" class="vc_ui-list-bar-item-trigger" title="%s"
-					 	data-template-handler=""
-						data-vc-ui-element="template-title">%s</button>
-			<div class="vc_ui-list-bar-item-actions">
-				<button type="button" class="vc_general vc_ui-control-button" title="%s"
-					 	data-template-handler="">
-					<i class="vc-composer-icon vc-c-icon-add"></i>
-				</button>
-				%s
-				<button type="button" class="vc_general vc_ui-control-button" title="%s"
-					data-vc-container=".vc_ui-list-bar" data-vc-preview-handler data-vc-target="[data-template_id_hash=%s]">
-					<i class="vc-composer-icon vc-c-icon-arrow_drop_down"></i>
-				</button>
-			</div>', esc_attr( $add_template_title ), esc_html( $template_name ), esc_attr( $add_template_title ), $deleteControlRender, esc_attr( $preview_template_title ), esc_attr( $template_id_hash ) );
 
-		// @codingStandardsIgnoreEnd
+		echo '<button type="button" class="vc_general vc_ui-control-button" title="' . esc_attr( $preview_template_title ) . '" data-vc-container=".vc_ui-list-bar" data-vc-preview-handler data-vc-target="[data-template_id_hash=' . esc_attr( $template_id_hash ) . ']"><i class="vc-composer-icon vc-c-icon-arrow_drop_down"></i></button></div>';
 
 		return ob_get_clean();
 	}
@@ -284,7 +268,7 @@ class Vc_Templates_Panel_Editor {
 				$this->renderFrontendDefaultTemplate();
 			} else {
 				// @codingStandardsIgnoreLine
-				echo apply_filters( 'vc_templates_render_frontend_template', $template_id, $template_type );
+				print apply_filters( 'vc_templates_render_frontend_template', $template_id, $template_type );
 			}
 		}
 		die; // no needs to do anything more. optimization.
@@ -355,7 +339,7 @@ class Vc_Templates_Panel_Editor {
 			'unique_id' => $template_id,
 		);
 		// @codingStandardsIgnoreLine
-		echo $this->renderTemplateListItem( $template );
+		print $this->renderTemplateListItem( $template );
 		die;
 	}
 
@@ -382,7 +366,7 @@ class Vc_Templates_Panel_Editor {
 			$pattern = get_shortcode_regex();
 			$content = preg_replace_callback( "/{$pattern}/s", 'vc_convert_shortcode', $content );
 			// @codingStandardsIgnoreLine
-			echo $content;
+			print $content;
 			die();
 		} else {
 			if ( 'default_templates' === $template_type ) {
@@ -390,7 +374,7 @@ class Vc_Templates_Panel_Editor {
 				die();
 			} else {
 				// @codingStandardsIgnoreLine
-				echo apply_filters( 'vc_templates_render_backend_template', $template_id, $template_type );
+				print apply_filters( 'vc_templates_render_backend_template', $template_id, $template_type );
 				die();
 			}
 		}
@@ -690,8 +674,7 @@ class Vc_Templates_Panel_Editor {
 		if ( $return ) {
 			return trim( $data['content'] );
 		} else {
-			// @codingStandardsIgnoreLine
-			echo trim( $data['content'] );
+			print trim( $data['content'] );
 			die;
 		}
 	}
@@ -827,13 +810,14 @@ class Vc_Templates_Panel_Editor {
 		$shortcodes_custom_css = visual_composer()->parseShortcodesCustomCss( vc_frontend_editor()->getTemplateContent() );
 		if ( ! empty( $shortcodes_custom_css ) ) {
 			$shortcodes_custom_css = wp_strip_all_tags( $shortcodes_custom_css );
-			$output .= '<style type="text/css" data-type="vc_shortcodes-custom-css">';
+			$first_tag = 'style';
+			$output .= '<' . $first_tag . ' data-type="vc_shortcodes-custom-css">';
 			$output .= $shortcodes_custom_css;
-			$output .= '</style>';
+			$output .= '</' . $first_tag . '>';
 		}
 		// @todo Check for wp_add_inline_style posibility
 		// @codingStandardsIgnoreLine
-		echo $output;
+		print $output;
 	}
 
 	public function addScriptsToTemplatePreview() {

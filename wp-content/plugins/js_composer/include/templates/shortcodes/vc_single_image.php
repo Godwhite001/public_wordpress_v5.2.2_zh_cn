@@ -93,10 +93,10 @@ switch ( $source ) {
 		$dimensions = vc_extract_dimensions( $external_img_size );
 		$hwstring = $dimensions ? image_hwstring( $dimensions[0], $dimensions[1] ) : '';
 
-		$custom_src = $custom_src ? esc_attr( $custom_src ) : $default_src;
+		$custom_src = $custom_src ? $custom_src : $default_src;
 
 		$img = array(
-			'thumbnail' => '<img class="vc_single_image-img" ' . $hwstring . ' src="' . $custom_src . '" />',
+			'thumbnail' => '<img class="vc_single_image-img" ' . $hwstring . ' src="' . esc_url( $custom_src ) . '" />',
 		);
 		break;
 
@@ -105,7 +105,7 @@ switch ( $source ) {
 }
 
 if ( ! $img ) {
-	$img['thumbnail'] = '<img class="vc_img-placeholder vc_single_image-img" src="' . $default_src . '" />';
+	$img['thumbnail'] = '<img class="vc_img-placeholder vc_single_image-img" src="' . esc_url( $default_src ) . '" />';
 }
 
 $el_class = $this->getExtraClass( $el_class );
@@ -234,5 +234,4 @@ $output = '
 	</div>
 ';
 
-// @codingStandardsIgnoreLine
-echo $output;
+return $output;

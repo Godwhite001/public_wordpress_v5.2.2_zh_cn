@@ -58,7 +58,7 @@ class Vc_Grid_Item_Preview {
 	 */
 	public function addImage( $img ) {
 		if ( empty( $img ) ) {
-			$img = '<img src="' . vc_asset_url( 'vc/vc_gitem_image.png' ) . '" alt="">';
+			$img = '<img src="' . esc_url( vc_asset_url( 'vc/vc_gitem_image.png' ) ) . '" alt="">';
 		}
 
 		return $img;
@@ -163,7 +163,7 @@ class Vc_Grid_Item_Preview {
 	public function addPlaceholderImage( $img ) {
 		if ( null === $img || false === $img ) {
 			$img = array(
-				'thumbnail' => '<img class="vc_img-placeholder vc_single_image-img" src="' . vc_asset_url( 'vc/vc_gitem_image.png' ) . '" />',
+				'thumbnail' => '<img class="vc_img-placeholder vc_single_image-img" src="' . esc_url( vc_asset_url( 'vc/vc_gitem_image.png' ) ) . '" />',
 			);
 		}
 

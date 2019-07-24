@@ -148,7 +148,7 @@ if ( ! class_exists( 'VcGridsCommon' ) ) {
 					'type' => 'textarea_safe',
 					'heading' => esc_html__( 'Custom query', 'js_composer' ),
 					'param_name' => 'custom_query',
-					'description' => sprintf( esc_html__( 'Build custom query according to %sWordPress Codex%s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Function_Reference/query_posts">', '</a>' ),
+					'description' => sprintf( esc_html__( 'Build custom query according to %sWordPress Codex%s.', 'js_composer' ), '<a href="https://codex.wordpress.org/Function_Reference/query_posts">', '</a>' ),
 
 					'dependency' => array(
 						'element' => 'post_type',
@@ -678,7 +678,7 @@ if ( ! class_exists( 'VcGridsCommon' ) ) {
 					'type' => 'el_id',
 					'heading' => esc_html__( 'Element ID', 'js_composer' ),
 					'param_name' => 'el_id',
-					'description' => sprintf( esc_html__( 'Enter element ID (Note: make sure it is unique and valid according to %sw3c specification%s).', 'js_composer' ), '<a href="http://www.w3schools.com/tags/att_global_id.asp" target="_blank">', '</a>' ),
+					'description' => sprintf( esc_html__( 'Enter element ID (Note: make sure it is unique and valid according to %sw3c specification%s).', 'js_composer' ), '<a href="https://www.w3schools.com/tags/att_global_id.asp" target="_blank">', '</a>' ),
 				),
 				array(
 					'type' => 'textfield',
@@ -1038,7 +1038,7 @@ if ( ! class_exists( 'VcGridsCommon' ) ) {
 					'type' => 'el_id',
 					'heading' => esc_html__( 'Element ID', 'js_composer' ),
 					'param_name' => 'el_id',
-					'description' => sprintf( esc_html__( 'Enter element ID (Note: make sure it is unique and valid according to %sw3c specification%s).', 'js_composer' ), '<a href="http://www.w3schools.com/tags/att_global_id.asp" target="_blank">', '</a>' ),
+					'description' => sprintf( esc_html__( 'Enter element ID (Note: make sure it is unique and valid according to %sw3c specification%s).', 'js_composer' ), '<a href="https://www.w3schools.com/tags/att_global_id.asp" target="_blank">', '</a>' ),
 				),
 				array(
 					'type' => 'textfield',

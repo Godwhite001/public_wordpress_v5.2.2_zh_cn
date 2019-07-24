@@ -84,8 +84,9 @@ class Vc_Grid_Element {
 				} else {
 					$content = $this->vcDefaultTemplate( $tag );
 				}
-				$output .= '<script type="text/template" data-vc-grid-element-template="' . esc_attr( $tag ) . '">' . $content . '</script>';
-				$output .= '<script type="text/template" data-vc-grid-element-template="modal">' . '<div class="vc_grid-element-modal-title"><# title #></div>' . '<div class="vc_grid-element-modal-controls"><# controls #></div>' . '<div class="vc_grid-element-modal-body"><# body #></div>' . '</script>';
+				$custom_tag = 'script';
+				$output .= '<' . $custom_tag . ' type="text/template" data-vc-grid-element-template="' . esc_attr( $tag ) . '">' . $content . '</' . $custom_tag . '>';
+				$output .= '<' . $custom_tag . ' type="text/template" data-vc-grid-element-template="modal">' . '<div class="vc_grid-element-modal-title"><# title #></div>' . '<div class="vc_grid-element-modal-controls"><# controls #></div>' . '<div class="vc_grid-element-modal-body"><# body #></div>' . '</' . $custom_tag . '>';
 			}
 			self::$templates_added = true;
 		}

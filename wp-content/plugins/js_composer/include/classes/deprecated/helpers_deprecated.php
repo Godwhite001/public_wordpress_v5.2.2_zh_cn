@@ -77,7 +77,18 @@ function fieldAttachedImages( $images = array() ) {
  * @deprecated
  */
 function getVcShared( $asset = '' ) {
-	_deprecated_function( 'getVcShared', '6.0', 'vc_get_shared' );
 
 	return vc_get_shared( $asset );
+}
+
+/**
+ * Return a action param for ajax
+ * @return bool
+ * @since 4.8
+ * @deprecated 6.1
+ */
+function vc_wp_action() {
+	_deprecated_function( 'vc_wp_action', '6.1', 'vc_request_param' );
+
+	return vc_request_param( 'action' );
 }

@@ -85,7 +85,9 @@ function vc_checkbox_form_field( $settings, $value ) {
 	$values = isset( $settings['value'] ) && is_array( $settings['value'] ) ? $settings['value'] : array( esc_html__( 'Yes', 'js_composer' ) => 'true' );
 	if ( ! empty( $values ) ) {
 		foreach ( $values as $label => $v ) {
-			$checked = in_array( $v, $current_value, true ) ? 'checked' : '';
+			// NOTE!! Don't use strict compare here for BC!
+			// @codingStandardsIgnoreLine
+			$checked = in_array( $v, $current_value ) ? 'checked' : '';
 			$output .= ' <label class="vc_checkbox-label"><input id="' . $settings['param_name'] . '-' . $v . '" value="' . $v . '" class="wpb_vc_param_value ' . $settings['param_name'] . ' ' . $settings['type'] . '" type="checkbox" name="' . $settings['param_name'] . '" ' . $checked . '>' . $label . '</label>';
 		}
 	}

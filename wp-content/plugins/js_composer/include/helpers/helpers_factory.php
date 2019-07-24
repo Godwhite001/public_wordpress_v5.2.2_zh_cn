@@ -162,11 +162,17 @@ if ( ! function_exists( 'vc_post_param' ) ) {
 	 * @param $param
 	 * @param $default
 	 *
+	 * @param bool $check
 	 * @return null|string - null for undefined param.
 	 * @since 4.2
 	 */
-	function vc_post_param( $param, $default = null ) {
-		// @codingStandardsIgnoreLine
+	function vc_post_param( $param, $default = null, $check = false ) {
+		if ( 'admin' === $check ) {
+			check_admin_referer();
+		} elseif ( 'ajax' === $check ) {
+			check_ajax_referer();
+		}
+
 		return isset( $_POST[ $param ] ) ? $_POST[ $param ] : $default;
 	}
 }
@@ -177,10 +183,17 @@ if ( ! function_exists( 'vc_get_param' ) ) {
 	 * @param string $param
 	 * @param $default
 	 *
+	 * @param bool $check
 	 * @return null|string - null for undefined param.
 	 * @since 4.2
 	 */
-	function vc_get_param( $param, $default = null ) {
+	function vc_get_param( $param, $default = null, $check = false ) {
+		if ( 'admin' === $check ) {
+			check_admin_referer();
+		} elseif ( 'ajax' === $check ) {
+			check_ajax_referer();
+		}
+
 		// @codingStandardsIgnoreLine
 		return isset( $_GET[ $param ] ) ? $_GET[ $param ] : $default;
 	}
@@ -192,10 +205,17 @@ if ( ! function_exists( 'vc_request_param' ) ) {
 	 * @param $param
 	 * @param $default
 	 *
+	 * @param bool $check
 	 * @return null|string - null for undefined param.
 	 * @since 4.4
 	 */
-	function vc_request_param( $param, $default = null ) {
+	function vc_request_param( $param, $default = null, $check = false ) {
+		if ( 'admin' === $check ) {
+			check_admin_referer();
+		} elseif ( 'ajax' === $check ) {
+			check_ajax_referer();
+		}
+
 		// @codingStandardsIgnoreLine
 		return isset( $_REQUEST[ $param ] ) ? $_REQUEST[ $param ] : $default;
 	}
@@ -465,16 +485,6 @@ function vc_user_roles_get_all() {
 	}
 
 	return $capabilities;
-}
-
-/**
- * Return a $_GET action param for ajax
- * @return bool
- * @since 4.8
- */
-function vc_wp_action() {
-	// @codingStandardsIgnoreLine
-	return isset( $_REQUEST['action'] ) ? $_REQUEST['action'] : false;
 }
 
 /**

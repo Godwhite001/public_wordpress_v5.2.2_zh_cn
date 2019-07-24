@@ -9,11 +9,11 @@ $dev_environment = vc_license()->isDevEnvironment();
 $license_key = vc_license()->getLicenseKey();
 
 $classes = 'vc_settings-tab-content vc_settings-tab-content-active ' . esc_attr( $css );
-
+$custom_tag = 'script';
 ?>
-<script type="text/javascript">
-	var vcAdminNonce = '<?php echo esc_js( vc_generate_nonce( 'vc-admin-nonce' ) ); ?>';
-</script>
+<<?php echo esc_attr( $custom_tag ); ?>>
+	window.vcAdminNonce = '<?php echo esc_js( vc_generate_nonce( 'vc-admin-nonce' ) ); ?>';
+</<?php echo esc_attr( $custom_tag ); ?>>
 <?php if ( 'updater' === $tab && $dev_environment && ! vc_license()->isActivated() ) : ?>
 	<br/>
 	<div class="updated vc_updater-result-message">
@@ -30,12 +30,8 @@ $classes = 'vc_settings-tab-content vc_settings-tab-content-active ' . esc_attr(
 		id="vc_settings-<?php echo esc_attr( $tab ); ?>"
 		data-vc-ui-element="settings-tab-<?php echo esc_attr( $tab ); ?>"
 		class="<?php echo esc_attr( $classes ); ?>"
-	<?php
-	// @codingStandardsIgnoreLine
-	echo apply_filters( 'vc_setting-tab-form-' . esc_attr( $tab ), '' );
-	?>
+		<?php echo apply_filters( 'vc_setting-tab-form-' . esc_attr( $tab ), '' ); ?>
 >
-
 	<?php settings_fields( vc_settings()->getOptionGroup() . '_' . $tab ); ?>
 	<?php do_settings_sections( vc_settings()->page() . '_' . $tab ); ?>
 	<?php if ( 'general' === $tab && vc_pointers_is_dismissed() ) : ?>

@@ -160,7 +160,7 @@
 			parent.vc.templates_panel_view.setTemplatePreviewSize();
 		}
 	} );
-	$( window ).resize( function () {
+	$( window ).on( 'resize', function () {
 		parent.vc.templates_panel_view.setTemplatePreviewSize();
 	} );
 })( window.jQuery );

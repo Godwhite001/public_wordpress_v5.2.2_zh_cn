@@ -79,5 +79,4 @@ if ( '' !== $title ) {
 $output .= '</div>';
 $output .= '</div>';
 
-// @codingStandardsIgnoreLine
-echo $output;
+return $output;
